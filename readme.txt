@@ -4,7 +4,7 @@ Tags: options, settings
 Tested up to: 6.5.3
 Requires at least: 6.4
 Requires PHP: 8.1
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -81,7 +81,7 @@ if ( class_exists( 'YMFO_Page' ) ) {
 
 = How to get new options values =
 
-To get your options values use `ymfo_get_option( $page_slug, $field_slug )`.
+To get your options values use `ymfo_get_option( $page_slug, $field_slug )` function or `[ymfo page="$page_slug" option="$field_slug"]` shortcode.
 
 For example let's print a link to your YouTube channel:
 
@@ -114,9 +114,12 @@ For example let's print a link to your YouTube channel:
 
 == Changelog ==
 
+= 1.0.7 =
+* Added `ymfo` get option shortcode
+
 = 1.0.6 =
 * Added `select` and `checkbox` field types
-* Added `options`, `max`, `step` field arguments
+* Added `options` field argument
 
 = 1.0.5 =
 * Minor fixes

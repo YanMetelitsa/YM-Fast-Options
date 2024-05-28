@@ -3,7 +3,7 @@
 /*
  * Plugin Name:       YM Fast Options
  * Description:       Create simple options for your WordPress website with a few lines of code.
- * Version:           1.0.6
+ * Version:           1.0.7
  * Tested up to:      6.5.3
  * Requires at least: 6.4
  * Requires PHP:      8.1
@@ -17,9 +17,14 @@
 /** Exit if accessed directly */
 if ( !defined( 'ABSPATH' ) ) exit;
 
-// Connect styles
+// Connects styles
 add_action( 'admin_enqueue_scripts', function () {
     wp_enqueue_style( 'ymfo-styles', plugins_url( 'assets/style.css', __FILE__ ) );
+});
+
+// Registers get option shortcode
+add_shortcode( 'ymfo', function ( $atts ) {
+	return ymfo_get_option( $atts[ 'page' ], $atts[ 'option' ] );
 });
 
 class YMFO_Page {
