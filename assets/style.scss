@@ -1,0 +1,9 @@
+.ymfo-page-content {
+	&__options-form {
+		tr:has( *[ required ] ) th label::after {
+			content: ' *';
+	
+			color: red;
+		}
+	}
+}
