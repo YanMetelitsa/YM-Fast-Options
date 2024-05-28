@@ -1,0 +1,51 @@
+/* All sections */
+.ymfo-page-header code,
+.ymfo-page-info code,
+.ymfo-page-content code {
+  padding: 3px 6px;
+  border-radius: 3px;
+}
+
+/* Content */
+.ymfo-page-content {
+  /* Main options form */
+}
+.ymfo-page-content__options-form tr th:has(*[required]) th label::after {
+  content: " *";
+  color: red;
+}
+
+/* Common */
+code.ymfo-copyable {
+  position: relative;
+  padding-left: 18px;
+  cursor: pointer;
+}
+code.ymfo-copyable:hover {
+  color: #000;
+}
+code.ymfo-copyable:hover::after {
+  background-color: #000;
+}
+code.ymfo-copyable::after {
+  content: "";
+  background-color: #3c434a;
+  -webkit-mask-image: url(../images/copyable.svg);
+          mask-image: url(../images/copyable.svg);
+  -webkit-mask-size: contain;
+          mask-size: contain;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  width: 9px;
+  height: 9px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+code.ymfo-copyable.ymfo-copied::after {
+  background-color: #49ad52;
+  -webkit-mask-image: url(../images/copied.svg);
+          mask-image: url(../images/copied.svg);
+}/*# sourceMappingURL=ymfo-style.css.map */

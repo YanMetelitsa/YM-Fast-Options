@@ -1,0 +1,60 @@
+/* All sections */
+.ymfo-page-header,
+.ymfo-page-info,
+.ymfo-page-content {
+	code {
+		padding: 3px 6px;
+		border-radius: 3px;
+	}
+}
+
+/* Content */
+.ymfo-page-content {
+	/* Main options form */
+	&__options-form {
+		tr {
+			th:has( *[ required ] ) th label::after {
+				content: ' *';
+		
+				color: red;
+			}
+		}
+	}
+}
+
+/* Common */
+code.ymfo-copyable {
+	position: relative;
+	padding-left: 18px;
+
+	cursor: pointer;
+
+	&:hover {
+		color: #000;
+
+		&::after {
+			background-color: #000;
+		}
+	}
+
+	&::after {
+		content: '';
+
+		background-color: #3c434a;
+		mask-image: url( ../images/copyable.svg );
+		mask-size: contain;
+		mask-position: center;
+		mask-repeat: no-repeat;
+		width: 9px;
+		height: 9px;
+
+		position: absolute;
+		top: 5px;
+		left: 5px;
+	}
+
+	&.ymfo-copied::after {
+		background-color: #49ad52;
+		mask-image: url( ../images/copied.svg );
+	}
+}

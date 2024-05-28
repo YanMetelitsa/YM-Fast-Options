@@ -98,7 +98,7 @@ if ( $args[ 'field_type' ] == 'checkbox' ) {
 
 // Print description
 printf(
-	'<p><code>%s</code>%s</p>',
+	'<p><code class="ymfo-copyable">%s</code>%s</p>',
 	esc_html( $args[ 'field_slug_tale' ] ),
 	$print_description ? ' – ' . esc_html( $args[ 'description' ] ) : '',
 );

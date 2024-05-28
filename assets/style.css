@@ -1,9 +1,0 @@
-.ymfo-pahe-header h2 {
-  margin: 0;
-  padding: 0;
-}
-
-.ymfo-options-form tr:has(*[required]) th label::after {
-  content: " *";
-  color: red;
-}/*# sourceMappingURL=style.css.map */

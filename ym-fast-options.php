@@ -3,7 +3,7 @@
 /*
  * Plugin Name:       YM Fast Options
  * Description:       Create simple options for your WordPress website with a few lines of code.
- * Version:           1.0.7
+ * Version:           1.0.8
  * Tested up to:      6.5.3
  * Requires at least: 6.4
  * Requires PHP:      8.1
@@ -19,7 +19,13 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 // Connects styles
 add_action( 'admin_enqueue_scripts', function () {
-    wp_enqueue_style( 'ymfo-styles', plugins_url( 'assets/style.css', __FILE__ ) );
+	if( !function_exists( 'get_plugin_data' ) ) {
+        require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    }
+	$plugin_data = get_plugin_data( __FILE__ );
+
+    wp_enqueue_style( 'ymfo-styles', plugins_url( 'assets/css/ymfo-style.css', __FILE__ ), [], $plugin_data[ 'Version' ] );
+	wp_enqueue_script( 'ymfo-scripts', plugins_url( 'assets/js/ymfo-script.js', __FILE__ ),  [], $plugin_data[ 'Version' ] );
 });
 
 // Registers get option shortcode
@@ -157,7 +163,7 @@ class YMFO_Page {
 	 * 		@type string $placeholder Input placeholder text. Default empty.
 	 * 		@type bool   $required    Is field required. Default false.
 	 * 
-	 * 		# For number type fields
+	 * 		# For number fields type
 	 * 
 	 * 		@type float|int $min  Minimum value.
 	 * 		@type float|int $max  Maximum value.
