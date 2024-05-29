@@ -55,6 +55,17 @@ switch ( $args[ 'field_type' ] ) {
 		$field_print_mask .= isset( $args[ 'description' ] ) ? ' ' . $args[ 'description' ] : '';
 		$field_print_mask .= '</label>';
 		break;
+	case 'radio':
+		$field_print_mask = '<fieldset>';
+		$field_print_mask .= '<legend class="screen-reader-text"><span>' . $args[ 'field_title' ] . '</span></legend>';
+		foreach ( $args[ 'options' ] as $option ) {
+			$value = $option[ 'value' ];
+			$label = $option[ 'label' ];
+
+			$field_print_mask .= '<label><input type="%1$s" name="%2$s" value="' . $value . '" ' . ( $field_value == $value ? 'checked' : '' ) . '> <span>' . $label . '</span></label><br>';
+		}
+		$field_print_mask .= '</fieldset>';
+		break;
 	case 'tel':
 		array_push( $field_classes, 'regular-text' );
 		break;

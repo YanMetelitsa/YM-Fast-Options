@@ -3,7 +3,7 @@
 /*
  * Plugin Name:       YM Fast Options
  * Description:       Create simple options for your WordPress website with a few lines of code.
- * Version:           1.0.8
+ * Version:           1.0.9
  * Tested up to:      6.5.3
  * Requires at least: 6.4
  * Requires PHP:      8.1
@@ -14,7 +14,7 @@
  * Text Domain:       ym-fast-options
  */
 
-/** Exit if accessed directly */
+// Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
 // Connects styles
@@ -44,7 +44,7 @@ class YMFO_Page {
      */
     private array $available_field_types = [
         'text', 'textarea', 'number',
-		'select', 'checkbox',
+		'select', 'checkbox', 'radio',
         'tel', 'email', 'url',
         'date', 'datetime-local', 'month', 'week', 'time',
         'color',
@@ -169,7 +169,7 @@ class YMFO_Page {
 	 * 		@type float|int $max  Maximum value.
 	 * 		@type float|int $step Step of value change by arrows.
 	 * 
-	 * 		# For select field type
+	 * 		# For select and radio field types
 	 * 
 	 * 		@type array $options {
 	 * 			@type string $label Option label.
@@ -202,6 +202,8 @@ class YMFO_Page {
                 ...$field_args,
 
                 'field_type'        => $field_type,
+
+				'field_title'       => $field_title,
 
                 'field_name'        => $field_slug,
                 'field_id'          => $field_slug,

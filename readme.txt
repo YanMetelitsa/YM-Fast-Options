@@ -4,7 +4,7 @@ Tags: options, settings
 Tested up to: 6.5.3
 Requires at least: 6.4
 Requires PHP: 8.1
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -96,6 +96,7 @@ For example let's print a link to your YouTube channel:
 - number
 - select
 - checkbox
+- radio
 - tel
 - email
 - url
@@ -113,6 +114,9 @@ For example let's print a link to your YouTube channel:
 1. **Install and Activate** YM Fast Options from the Plugins page
 
 == Changelog ==
+
+= 1.0.9 =
+* Added `radio` field type
 
 = 1.0.8 =
 * Visual improvement

@@ -1,8 +1,4 @@
-# YM-Fast-Options
-
 Create simple options, settings, global data fields and more for your WordPress website with a few lines of code.
-
-== Description ==
 
 = How to use =
 
@@ -73,7 +69,7 @@ if ( class_exists( 'YMFO_Page' ) ) {
 
 = How to get new options values =
 
-To get your options values use `ymfo_get_option( $page_slug, $field_slug )`.
+To get your options values use `ymfo_get_option( $page_slug, $field_slug )` function or `[ymfo page="$page_slug" option="$field_slug"]` shortcode.
 
 For example let's print a link to your YouTube channel:
 
@@ -88,6 +84,7 @@ For example let's print a link to your YouTube channel:
 - number
 - select
 - checkbox
+- radio
 - tel
 - email
 - url
@@ -106,9 +103,19 @@ For example let's print a link to your YouTube channel:
 
 == Changelog ==
 
+= 1.0.9 =
+* Added `radio` field type
+
+= 1.0.8 =
+* Visual improvement
+* Ability to copy fields slugs and code snippets by click
+
+= 1.0.7 =
+* Added `ymfo` get option shortcode
+
 = 1.0.6 =
 * Added `select` and `checkbox` field types
-* Added `options`, `max`, `step` field arguments
+* Added `options` field argument
 
 = 1.0.5 =
 * Minor fixes
