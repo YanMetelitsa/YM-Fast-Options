@@ -3,7 +3,7 @@
 /*
  * Plugin Name:       YM Fast Options
  * Description:       Create simple options for your WordPress website with a few lines of code.
- * Version:           1.0.9
+ * Version:           1.0.10
  * Tested up to:      6.5.3
  * Requires at least: 6.4
  * Requires PHP:      8.1
@@ -66,6 +66,7 @@ class YMFO_Page {
 	 * 		@type callable		 $callback     The function to be called to output the content for this page.
 	 * 		@type string         $capability   The capability required for this menu to be
 	 * 										   displayed to the user. Default 'manage_options'.
+	 * 		@type bool           $show_docs    Set false to hide plugin docs on this page. Default true.
 	 * }
      */
     function __construct ( string $page_title, string $page_slug_tale, array $page_args = [] ) {
@@ -85,6 +86,8 @@ class YMFO_Page {
                 include 'page.php';
             },
 			'capability'   => 'manage_options',
+
+			'show_docs'    => true,
 
 			...$page_args,
 		];
