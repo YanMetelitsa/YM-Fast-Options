@@ -103,6 +103,9 @@ For example let's print a link to your YouTube channel:
 
 == Changelog ==
 
+= 1.0.11 =
+* Added `ymfo_add_option` and `ymfo_update_option` functions
+
 = 1.0.10 =
 * New page boolean argument `show_docs` (default true). Allows to hide plugin documentation on settings page
 

@@ -3,7 +3,7 @@
 /*
  * Plugin Name:       YM Fast Options
  * Description:       Create simple options for your WordPress website with a few lines of code.
- * Version:           1.0.10
+ * Version:           1.0.11
  * Tested up to:      6.5.3
  * Requires at least: 6.4
  * Requires PHP:      8.1
@@ -243,6 +243,34 @@ class YMFO_Page {
 	private function format_field_slug ( string $page_slug_tale, string $field_slug_tale ) : string {
 		return $this->format_page_slug( $page_slug_tale ) . "-{$field_slug_tale}-field";
 	}
+}
+
+/**
+ * Adds YM Fast Options new option
+ * 
+ * @param string      $page       Option page slug
+ * @param string      $option     Option slug
+ * @param mixed       $value      Option value
+ * @param string|bool $autoload   Whether to load the option when WordPress starts up
+ * 
+ * @return bool Always returns true
+ */
+function ymfo_add_option ( string $page, string $option, mixed $value = '', string|bool $autoload = 'yes' ) : mixed {
+    return add_option( "ymfo-{$page}-{$option}-field", $value, '', $autoload );
+}
+
+/**
+ * Updates YM Fast Options option value
+ * 
+ * @param string      $page     Option page slug
+ * @param string      $option   Option slug
+ * @param mixed       $value    Option value
+ * @param string|bool $autoload Whether to load the option when WordPress starts up
+ * 
+ * @return bool True if the value was updated, false otherwise
+ */
+function ymfo_update_option ( string $page, string $option, mixed $value = '', string|bool $autoload = null ) : mixed {
+    return update_option( "ymfo-{$page}-{$option}-field", $value, $autoload );
 }
 
 /**
