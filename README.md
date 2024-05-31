@@ -103,6 +103,9 @@ For example let's print a link to your YouTube channel:
 
 == Changelog ==
 
+= 1.0.12 =
+* Added ability to add HTML to field descriptions
+
 = 1.0.11 =
 * Added `ymfo_add_option` and `ymfo_update_option` functions
 
