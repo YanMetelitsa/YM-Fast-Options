@@ -13,7 +13,7 @@
 	/* Main options form */
 	&__options-form {
 		tr {
-			th:has( *[ required ] ) th label::after {
+			&:has( *[ required ] ) th label::after {
 				content: ' *';
 		
 				color: red;

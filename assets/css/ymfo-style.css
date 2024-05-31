@@ -10,7 +10,7 @@
 .ymfo-page-content {
   /* Main options form */
 }
-.ymfo-page-content__options-form tr th:has(*[required]) th label::after {
+.ymfo-page-content__options-form tr:has(*[required]) th label::after {
   content: " *";
   color: red;
 }
