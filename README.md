@@ -52,7 +52,7 @@ Our result code is:
 
 `
 /** Registers YMFO custom options */
-if ( class_exists( 'YMFO_Page' ) ) {
+if ( class_exists( 'YMFO' ) ) {
 	// Create page
 	$contacts_page = new YMFO_Page( 'Contacts', 'contacts' );
 
