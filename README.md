@@ -1,17 +1,17 @@
 Create simple options, settings, global data fields and more for your WordPress website with a few lines of code.
 
+== Description ==
+
 = How to use =
 
 First of all open your `functions.php` theme file. All the next steps will take place in it.
 
-**1. Add callback function to `admin_menu` action hook**
+**1. Check is plugin activated**
 
 `
-if ( class_exists( 'YMFO_Page' ) ) {
-	/** Registers YMFO custom options */
-	add_action( 'admin_menu', function () {
-		// Next code here
-	});
+/** Registers YMFO custom options */
+if ( class_exists( 'YMFO' ) ) {
+	// Next code here
 }
 `
 
@@ -51,19 +51,17 @@ You can locate the new options page in the WordPress admin area on the sidebar.
 Our result code is:
 
 `
+/** Registers YMFO custom options */
 if ( class_exists( 'YMFO_Page' ) ) {
-	/** Registers YMFO custom options */
-	add_action( 'admin_menu', function () {
-		// Create page
-		$contacts_page = new YMFO_Page( 'Contacts', 'contacts' );
+	// Create page
+	$contacts_page = new YMFO_Page( 'Contacts', 'contacts' );
 
-		// Create section
-		$contacts_page->add_section( 'Social media', 'social_media' );
+	// Create section
+	$contacts_page->add_section( 'Social media', 'social_media' );
 
-		// Create fields
-		$contacts_page->add_field( 'YouTube', 'youtube_link', 'url', 'social_media' );
-		$contacts_page->add_field( 'Facebook', 'facebook_link', 'url', 'social_media' );
-	});
+	// Create fields
+	$contacts_page->add_field( 'YouTube', 'youtube_link', 'url', 'social_media' );
+	$contacts_page->add_field( 'Facebook', 'facebook_link', 'url', 'social_media' );
 }
 `
 
@@ -102,6 +100,13 @@ For example let's print a link to your YouTube channel:
 1. **Install and Activate** YM Fast Options from the Plugins page
 
 == Changelog ==
+
+= 2.0.0 =
+* YMFO `format_field_slug` and `format_page_slug` methods are public and static now
+* Added ability to add HTML to section descriptions
+* PHPDoc improvements
+* YMFO_Page `parent_page` argument now can be `string` type
+* Since 2.0.0 you will have to avoid using `add_action` callback to register YMFO options
 
 = 1.0.12 =
 * Added ability to add HTML to field descriptions

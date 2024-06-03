@@ -14,6 +14,7 @@ $field_print_mask = '<input type="%1$s" name="%2$s" id="%3$s" class="%4$s" %5$s 
 switch ( $args[ 'field_type' ] ) {
 	case 'text':
 		array_push( $field_classes, 'regular-text' );
+
 		break;
 	case 'textarea':
 		$field_additional_attrs[ 'rows' ] = isset( $args[ 'rows' ] ) ? $args[ 'rows' ] : 2;
@@ -21,6 +22,7 @@ switch ( $args[ 'field_type' ] ) {
 		$field_print_mask = '<textarea name="%2$s" id="%3$s" class="%4$s" %5$s placeholder="%6$s" %8$s>%7$s</textarea>';
 
 		array_push( $field_classes, 'regular-text' );
+
 		break;
 	case 'number':
 		if ( isset( $args[ 'min' ] ) ) {
@@ -32,16 +34,20 @@ switch ( $args[ 'field_type' ] ) {
 		if ( isset( $args[ 'step' ] ) ) {
 			$field_additional_attrs[ 'step' ] = $args[ 'step' ];
 		}
+
 		break;
 	case 'select':
 		$field_print_mask = '<select name="%2$s" id="%3$s" %5$s %8$s>';
+
 		foreach ( $args[ 'options' ] as $option ) {
 			$value = $option[ 'value' ];
 			$label = $option[ 'label' ];
 
 			$field_print_mask .= '<option value="' . $value . '" ' . ( $field_value == $value ? 'selected' : '' ) . '>' . $label . '</option>';
 		}
+
 		$field_print_mask .= '</select>';
+
 		break;
 	case 'checkbox':
 		$value = boolval( $field_value ) ? true : false;
@@ -54,27 +60,34 @@ switch ( $args[ 'field_type' ] ) {
 		$field_print_mask .= '<input type="%1$s" name="%2$s" id="%3$s" %5$s %8$s>';
 		$field_print_mask .= isset( $args[ 'description' ] ) ? ' ' . $args[ 'description' ] : '';
 		$field_print_mask .= '</label>';
+
 		break;
 	case 'radio':
 		$field_print_mask = '<fieldset>';
 		$field_print_mask .= '<legend class="screen-reader-text"><span>' . $args[ 'field_title' ] . '</span></legend>';
+
 		foreach ( $args[ 'options' ] as $option ) {
 			$value = $option[ 'value' ];
 			$label = $option[ 'label' ];
 
 			$field_print_mask .= '<label><input type="%1$s" name="%2$s" value="' . $value . '" ' . ( $field_value == $value ? 'checked' : '' ) . '> <span>' . $label . '</span></label><br>';
 		}
+
 		$field_print_mask .= '</fieldset>';
+
 		break;
 	case 'tel':
 		array_push( $field_classes, 'regular-text' );
+
 		break;
 	case 'email':
 		array_push( $field_classes, 'regular-text' );
+
 		break;
 	case 'url':
 		array_push( $field_classes, 'regular-text' );
 		array_push( $field_classes, 'code' );
+
 		break;
 }
 
@@ -83,7 +96,6 @@ $field_additional_attrs_output = '';
 foreach ( $field_additional_attrs as $attr => $value ) {
 	$field_additional_attrs_output .= $attr . ( !is_null( $value ) ? '=' . esc_attr( $value ) : '' ) . ' ';
 }
-$field_additional_attrs = $field_additional_attrs_output;
 
 // Print field
 printf(
@@ -92,12 +104,13 @@ printf(
 	esc_attr( $args[ 'field_name' ] ),					// 2. Name
 	esc_attr( $args[ 'field_id' ] ),					// 3. ID
 	esc_attr( implode( ' ', $field_classes ) ),			// 4. Class
-	$field_additional_attrs,							// 5. Additional attributes
+	$field_additional_attrs_output,						// 5. Additional attributes
 	esc_attr( $field_placeholder ),						// 6. Placeholder
 	esc_attr( $field_value ),							// 7. Value
 	$args[ 'is_field_required' ] ? 'required' : '',		// 8. Required
 );
 
+// Print description
 $print_description = true;
 
 if ( !isset( $args[ 'description' ] ) ) {
@@ -107,7 +120,6 @@ if ( $args[ 'field_type' ] == 'checkbox' ) {
 	$print_description = false;
 }
 
-// Print description
 printf(
 	'<p><code class="ymfo-copyable">%s</code>%s</p>',
 	esc_html( $args[ 'field_slug_tale' ] ),
