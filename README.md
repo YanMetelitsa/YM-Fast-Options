@@ -75,7 +75,7 @@ For example let's print a link to your YouTube channel:
 <a href="<?php echo esc_attr( ymfo_get_option( 'contacts', 'youtube_link' ) ); ?>">YouTube</a>
 `
 
-= Allowed field types =
+## Allowed field types
 
 - text
 - textarea
