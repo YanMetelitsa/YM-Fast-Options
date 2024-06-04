@@ -101,6 +101,10 @@ For example let's print a link to your YouTube channel:
 
 # Changelog
 
+## 2.0.1
+* New `ymfo_is_option_exists` function
+* Bug fix for default checkbox value
+
 ## 2.0.0
 * YMFO `format_field_slug` and `format_page_slug` methods are public and static now
 * Added ability to add HTML to section descriptions

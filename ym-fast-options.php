@@ -3,7 +3,7 @@
 /*
  * Plugin Name:       YM Fast Options
  * Description:       Create simple options for your WordPress website with a few lines of code.
- * Version:           2.0.0
+ * Version:           2.0.1
  * Tested up to:      6.5.3
  * Requires at least: 6.4
  * Requires PHP:      8.1
@@ -75,6 +75,24 @@ function ymfo_update_option ( string $page, string $option, mixed $value = '', s
  */
 function ymfo_get_option ( string $page, string $option, mixed $default_value = false ) : mixed {
     return get_option( YMFO::format_field_slug( $page, $option ), $default_value );
+}
+
+/**
+ * Returns is option exists in database.
+ * 
+ * @since 2.0.1
+ * 
+ * @param string $page          Option page slug.
+ * @param string $option        Option slug.
+ * 
+ * @return bool True if option exists.
+ */
+function ymfo_is_option_exists ( string $page, string $option ) : bool {
+	global $wpdb;
+
+	$full_option_name = esc_sql( YMFO::format_field_slug( $page, $option ) );
+	
+	return boolval( $wpdb->query( "SELECT * FROM `{$wpdb->options}` WHERE `option_name` = '{$full_option_name}' LIMIT 1" ) );
 }
 
 // Init YM Fast Options

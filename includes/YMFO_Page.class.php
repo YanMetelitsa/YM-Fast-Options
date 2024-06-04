@@ -214,22 +214,28 @@ class YMFO_Page {
         
         // Get full field slug
         $field_slug = YMFO::format_field_slug( $this->page_slug_tale, $field_slug_tale );
-
+		
 		// Register setting
+		$page_slug_tale = $this->page_slug_tale;
 		$register_setting_args = [
 			$this->page_slug,
 			$field_slug,
 		];
-        add_action( 'init', function () use ( $register_setting_args, $field_slug, $field_args ) {
+        add_action( 'init', function () use ( $register_setting_args, $page_slug_tale, $field_slug_tale, $field_type, $field_args ) {
 			register_setting( ...$register_setting_args );
 
 			// Set default option
-			$current_option_value = get_option( $field_slug );
+			$current_option_value   = ymfo_get_option( $page_slug_tale, $field_slug_tale );
+			$is_current_value_empty = empty( $current_option_value ) && $current_option_value !== '0';
+			$is_option_exists       = ymfo_is_option_exists( $page_slug_tale, $field_slug_tale );
 
-			if ( isset( $field_args[ 'default' ] ) ) {
-				if ( empty( $current_option_value ) && $current_option_value !== '0' ) {
-					update_option( $field_slug, $field_args[ 'default' ] );
-				}
+			// If checkbox and exists - not update
+			if ( $field_type == 'checkbox' && $is_option_exists ) {
+				$is_current_value_empty = false; 
+			}
+
+			if ( isset( $field_args[ 'default' ] ) && $is_current_value_empty ) {
+				ymfo_update_option( $page_slug_tale, $field_slug_tale, $field_args[ 'default' ] );
 			}
 		});
 

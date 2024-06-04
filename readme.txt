@@ -4,7 +4,7 @@ Tags: options, settings
 Tested up to: 6.5.3
 Requires at least: 6.4
 Requires PHP: 8.1
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -110,6 +110,10 @@ For example let's print a link to your YouTube channel:
 1. **Install and Activate** YM Fast Options from the Plugins page
 
 == Changelog ==
+
+= 2.0.1 =
+* New `ymfo_is_option_exists` function
+* Bug fix for default checkbox value
 
 = 2.0.0 =
 * YMFO `format_field_slug` and `format_page_slug` methods are public and static now
