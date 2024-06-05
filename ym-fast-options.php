@@ -4,7 +4,7 @@
  * Plugin Name:       YM Fast Options
  * Description:       Create simple options for your WordPress website with a few lines of code.
  * Version:           2.0.2
- * Tested up to:      6.5.3
+ * Tested up to:      6.5.4
  * Requires at least: 6.4
  * Requires PHP:      8.1
  * Author:            Yan Metelitsa
