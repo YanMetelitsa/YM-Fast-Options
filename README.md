@@ -101,6 +101,9 @@ For example let's print a link to your YouTube channel:
 
 # Changelog
 
+## 2.0.2
+* Plugin's usage docs have been moved to the option page help tab
+
 ## 2.0.1
 * New `ymfo_is_option_exists` function
 * Bug fix for default checkbox value

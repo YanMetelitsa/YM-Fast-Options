@@ -61,6 +61,7 @@ class YMFO_Page {
 	 * 
 	 * @since 1.0.3  Has `parent_page` and `callback` arguments.
 	 * @since 1.0.10 Has `show_docs` argument.
+	 * @since 2.0.2  `show_docs` argument removed.
      * 
      * @param string $page_title     The text to be displayed in the title tags of the page when the menu is selected.
      * @param string $page_slug_tale The tale part of slug name to refer to this menu by.
@@ -75,7 +76,6 @@ class YMFO_Page {
 	 * 		@type callable		        $callback     The function to be called to output the content for this page.
 	 * 		@type string                $capability   The capability required for this menu to be
 	 * 										          displayed to the user. Default 'manage_options'.
-	 * 		@type bool                  $show_docs    Set false to hide plugin docs on this page. Default true.
 	 * }
      */
     function __construct ( string $page_title, string $page_slug_tale, array $page_args = [] ) {
@@ -95,8 +95,6 @@ class YMFO_Page {
                 include YMFO_ROOT_DIR . 'page.php';
             },
 			'capability'   => 'manage_options',
-
-			'show_docs'    => true,
 
 			...$page_args,
 		];
@@ -144,6 +142,43 @@ class YMFO_Page {
 				add_submenu_page( ...$add_page_args );
 			});
 		}
+
+		/** Prints help tab */
+		add_action( 'admin_head', function () {
+			$current_screen = get_current_screen();
+
+			if ( str_contains( $current_screen->base, 'ymfo-' ) ) {
+				ob_start();
+
+				$current_screen_page_slug_tale = explode( 'ymfo-', $current_screen->base )[ 1 ];
+				
+				?>
+					<h3><?php _e( 'How to get option value', 'ym-fast-options' ) ?></h3>
+					<p><?php _e( 'To get option value you can use function in your template, or shortcode in posts content.', 'ym-fast-options' ); ?></p>
+					<p><?php _e( 'In both cases, you\'ll need a <code>label</code> value – you will be able to find it under each field', 'ym-fast-options' ); ?></p>
+
+					<h3><?php _e( 'Function', 'ym-fast-options' ) ?></h3>
+					<p><code class="ymfo-copyable">ymfo_get_option( '<?= esc_html( $current_screen_page_slug_tale ); ?>', 'label' )</code></p>
+
+					<h3><?php _e( 'Shortcode', 'ym-fast-options' ) ?></h3>
+					<p><code class="ymfo-copyable">[ymfo page="<?= esc_html( $current_screen_page_slug_tale ); ?>" option="label"]</code></p>
+
+					<p><?php _e( '','ym-fast-options' ); ?></p>
+					<p><?php _e( '','ym-fast-options' ); ?></p>
+					<p><?php _e( '','ym-fast-options' ); ?></p>
+					<p><?php _e( '','ym-fast-options' ); ?></p>
+					<p><?php _e( '','ym-fast-options' ); ?></p>
+				<?php
+
+				$how_to_use_content = ob_get_clean();
+
+				$current_screen->add_help_tab([
+					'title'    => __( 'How to use', 'ym-fast-shop' ),
+					'id'       => 'ymfo-how-to-use',
+					'content'  => $how_to_use_content,
+				]);
+			}
+		});
     }
 
     /**
