@@ -1,8 +1,9 @@
 <?php
 
+/** Exit if accessed directly */
 if ( !defined( 'ABSPATH' ) ) exit;
 
-// Set field data
+/** Set field data */
 $field_classes           = [];
 $field_additional_attrs  = [];
 $field_placeholder       = isset( $args[ 'placeholder' ] ) ? $args[ 'placeholder' ] : null;
@@ -10,12 +11,14 @@ $field_value             = ymfo_get_option( $args[ 'page_slug_tale' ], $args[ 'f
 
 $field_print_mask = '<input type="%1$s" name="%2$s" id="%3$s" class="%4$s" %5$s placeholder="%6$s" value="%7$s" %8$s>';
 
-// Change field data by type
+/** Change field data by type */
 switch ( $args[ 'field_type' ] ) {
+	/** Text */
 	case 'text':
 		array_push( $field_classes, 'regular-text' );
 
 		break;
+	/** Textarea */
 	case 'textarea':
 		$field_additional_attrs[ 'rows' ] = isset( $args[ 'rows' ] ) ? $args[ 'rows' ] : 2;
 
@@ -24,6 +27,7 @@ switch ( $args[ 'field_type' ] ) {
 		array_push( $field_classes, 'regular-text' );
 
 		break;
+	/** Number */
 	case 'number':
 		if ( isset( $args[ 'min' ] ) ) {
 			$field_additional_attrs[ 'min' ] = $args[ 'min' ];
@@ -36,6 +40,7 @@ switch ( $args[ 'field_type' ] ) {
 		}
 
 		break;
+	/** Select */
 	case 'select':
 		$field_print_mask = '<select name="%2$s" id="%3$s" %5$s %8$s>';
 
@@ -49,6 +54,7 @@ switch ( $args[ 'field_type' ] ) {
 		$field_print_mask .= '</select>';
 
 		break;
+	/** Checkbox */
 	case 'checkbox':
 		$value = boolval( $field_value ) ? true : false;
 
@@ -62,6 +68,7 @@ switch ( $args[ 'field_type' ] ) {
 		$field_print_mask .= '</label>';
 
 		break;
+	/** Radio */
 	case 'radio':
 		$field_print_mask = '<fieldset>';
 		$field_print_mask .= '<legend class="screen-reader-text"><span>' . $args[ 'field_title' ] . '</span></legend>';
@@ -76,14 +83,17 @@ switch ( $args[ 'field_type' ] ) {
 		$field_print_mask .= '</fieldset>';
 
 		break;
+	/** Tel */
 	case 'tel':
 		array_push( $field_classes, 'regular-text' );
 
 		break;
+	/** Email */
 	case 'email':
 		array_push( $field_classes, 'regular-text' );
 
 		break;
+	/** URL */
 	case 'url':
 		array_push( $field_classes, 'regular-text' );
 		array_push( $field_classes, 'code' );
@@ -91,26 +101,26 @@ switch ( $args[ 'field_type' ] ) {
 		break;
 }
 
-// Format additional arguments
-$field_additional_attrs_output = '';
+/** Format additional arguments */
+$field_additional_attrs_output = [];
 foreach ( $field_additional_attrs as $attr => $value ) {
-	$field_additional_attrs_output .= $attr . ( !is_null( $value ) ? '=' . esc_attr( $value ) : '' ) . ' ';
+	$field_additional_attrs_output[] = $attr . ( !is_null( $value ) ? '=' . esc_attr( $value ) : '' );
 }
 
-// Print field
+/** Print field */
 printf(
 	$field_print_mask,
 	esc_attr( $args[ 'field_type' ] ),					// 1. Type
 	esc_attr( $args[ 'field_name' ] ),					// 2. Name
 	esc_attr( $args[ 'field_id' ] ),					// 3. ID
 	esc_attr( implode( ' ', $field_classes ) ),			// 4. Class
-	$field_additional_attrs_output,						// 5. Additional attributes
+	implode( ' ', $field_additional_attrs_output ),		// 5. Additional attributes
 	esc_attr( $field_placeholder ),						// 6. Placeholder
 	esc_attr( $field_value ),							// 7. Value
 	$args[ 'is_field_required' ] ? 'required' : '',		// 8. Required
 );
 
-// Print description
+/** Print description */
 $print_description = true;
 
 if ( !isset( $args[ 'description' ] ) ) {

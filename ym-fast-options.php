@@ -14,21 +14,21 @@
  * Text Domain:       ym-fast-options
  */
 
-// Exit if accessed directly
+/** Exit if accessed directly */
 if ( !defined( 'ABSPATH' ) ) exit;
 
-// Get plugin data
+/** Get plugin data */
 if( !function_exists( 'get_plugin_data' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
 $YMFO_plugin_data = get_plugin_data( __FILE__ );
 
-// Define constants
+/** Define constants */
 define( 'YMFO_PLUGIN_DATA', $YMFO_plugin_data );
 define( 'YMFO_ROOT_DIR',    plugin_dir_path( __FILE__ ) );
 define( 'YMFO_ROOT_URI',    plugin_dir_url( __FILE__ ) );
 
-// Include components
+/** Include components */
 require_once YMFO_ROOT_DIR . 'includes/YMFO.class.php';
 require_once YMFO_ROOT_DIR . 'includes/YMFO_Page.class.php';
 
@@ -95,5 +95,5 @@ function ymfo_is_option_exists ( string $page, string $option ) : bool {
 	return boolval( $wpdb->query( "SELECT * FROM `{$wpdb->options}` WHERE `option_name` = '{$full_option_name}' LIMIT 1" ) );
 }
 
-// Init YM Fast Options
+/** Init YM Fast Options */
 YMFO::init();

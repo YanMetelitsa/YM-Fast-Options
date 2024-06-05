@@ -1,4 +1,7 @@
-<?php  if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php 
+	// Exit if accessed directly
+	if ( !defined( 'ABSPATH' ) ) exit;
+?>
 
 <!-- Header -->
 <div class="ymfo-page-header">

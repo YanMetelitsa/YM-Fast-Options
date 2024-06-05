@@ -1,6 +1,6 @@
 <?php
 
-// Exit if accessed directly
+/** Exit if accessed directly */
 if ( !defined( 'ABSPATH' ) ) exit;
 
 /** YM Fast Options page class */
@@ -79,7 +79,7 @@ class YMFO_Page {
 	 * }
      */
     function __construct ( string $page_title, string $page_slug_tale, array $page_args = [] ) {
-        // Save page data to instance
+        /** Save page data to instance */
         $this->page_slug_tale = $page_slug_tale;
         $this->page_slug      = YMFO::format_page_slug( $page_slug_tale );
         $this->page_title     = $page_title;
@@ -101,7 +101,7 @@ class YMFO_Page {
 			...$page_args,
 		];
 
-        // Set page arguments
+        /** Set page arguments */
         $add_page_args = [
             $this->page_title,          		// Page title
             $this->page_args[ 'menu_title' ],	// Menu title
@@ -112,14 +112,14 @@ class YMFO_Page {
 			$this->page_args[ 'position' ],		// Position
         ];
 
-		// Add top page, settings page or child of parent page
+		/** Add top page, settings page or child page */
 		if ( $this->page_args[ 'parent_page' ] === null ) {
 			if ( $this->page_args[ 'is_top_level' ] ) {
 				add_action( 'admin_menu', function () use ( $add_page_args ) {
 					add_menu_page( ...$add_page_args );
 				});
 			} else {
-				// Remove icon argument value
+				/** Remove icon argument value */
 				unset( $add_page_args[ 5 ] );
 	
 				add_action( 'admin_menu', function () use ( $add_page_args ) {
@@ -127,17 +127,17 @@ class YMFO_Page {
 				});
 			}
 		} else {
-			// Get parent page slug
+			/** Get parent page slug */
 			$parent_page_slug = $this->page_args[ 'parent_page' ];
 
 			if ( $this->page_args[ 'parent_page' ] instanceof YMFO_Page ) {
 				$parent_page_slug = $this->page_args[ 'parent_page' ]->page_slug;
 			}
 
-			// Remove icon argument value
+			/** Remove icon argument value */
 			unset( $add_page_args[ 5 ] );
 
-			// Add parent slug argument value
+			/** Add parent slug argument value */
 			array_unshift( $add_page_args, $parent_page_slug );
 
 			add_action( 'admin_menu', function () use ( $add_page_args ) {
@@ -207,15 +207,15 @@ class YMFO_Page {
 	 * }
      */
     public function add_field ( string $field_title, string $field_slug_tale, string $field_type, string $field_section, array $field_args = [] ) : void {
-        // Check is field type allowed
+        /** Check is field type allowed */
         if ( !in_array( $field_type, $this->available_field_types ) ) {
             return;
         }
         
-        // Get full field slug
+        /** Get full field slug */
         $field_slug = YMFO::format_field_slug( $this->page_slug_tale, $field_slug_tale );
 		
-		// Register setting
+		/** Register setting */
 		$page_slug_tale = $this->page_slug_tale;
 		$register_setting_args = [
 			$this->page_slug,
@@ -224,22 +224,23 @@ class YMFO_Page {
         add_action( 'init', function () use ( $register_setting_args, $page_slug_tale, $field_slug_tale, $field_type, $field_args ) {
 			register_setting( ...$register_setting_args );
 
-			// Set default option
+			/** Set default option */
 			$current_option_value   = ymfo_get_option( $page_slug_tale, $field_slug_tale );
 			$is_current_value_empty = empty( $current_option_value ) && $current_option_value !== '0';
 			$is_option_exists       = ymfo_is_option_exists( $page_slug_tale, $field_slug_tale );
 
-			// If checkbox and exists - not update
+			/** If checkbox and exists - not update */
 			if ( $field_type == 'checkbox' && $is_option_exists ) {
 				$is_current_value_empty = false; 
 			}
 
+			/** Update */
 			if ( isset( $field_args[ 'default' ] ) && $is_current_value_empty ) {
 				ymfo_update_option( $page_slug_tale, $field_slug_tale, $field_args[ 'default' ] );
 			}
 		});
 
-		// Add field
+		/** Add field */
 		$add_settings_field_args = [
 			$field_slug,                				// Field slug
             $field_title,								// Field title
