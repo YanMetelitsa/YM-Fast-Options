@@ -154,7 +154,7 @@ class YMFO_Page {
 				
 				?>
 					<h3><?php _e( 'How to get option value', 'ym-fast-options' ) ?></h3>
-					<p><?php _e( 'To get option value you can use function in your template, or shortcode in posts content.', 'ym-fast-options' ); ?></p>
+					<p><?php _e( 'To get option value you can use function in your theme, or shortcode in posts content.', 'ym-fast-options' ); ?></p>
 					<p><?php _e( 'In both cases, you\'ll need a <code>label</code> value – you will be able to find it under each field.', 'ym-fast-options' ); ?></p>
 
 					<h3><?php _e( 'Function', 'ym-fast-options' ) ?></h3>
