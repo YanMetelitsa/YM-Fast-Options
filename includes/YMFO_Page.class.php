@@ -173,7 +173,7 @@ class YMFO_Page {
 				$how_to_use_content = ob_get_clean();
 
 				$current_screen->add_help_tab([
-					'title'    => __( 'How to use', 'ym-fast-shop' ),
+					'title'    => __( 'How to use', 'ym-fast-options' ),
 					'id'       => 'ymfo-how-to-use',
 					'content'  => $how_to_use_content,
 				]);

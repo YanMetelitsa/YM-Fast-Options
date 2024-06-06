@@ -101,6 +101,9 @@ For example let's print a link to your YouTube channel:
 
 # Changelog
 
+## 2.0.5
+* Translation fix
+
 ## 2.0.2
 * Plugin's usage docs have been moved to the option page help tab
 

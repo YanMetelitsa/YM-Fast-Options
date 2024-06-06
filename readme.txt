@@ -4,7 +4,7 @@ Tags: options, settings
 Tested up to: 6.5.4
 Requires at least: 6.4
 Requires PHP: 8.1
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -110,6 +110,9 @@ For example let's print a link to your YouTube channel:
 1. **Install and Activate** YM Fast Options from the Plugins page
 
 == Changelog ==
+
+= 2.0.5 =
+* Translation fix
 
 = 2.0.2 =
 * Plugin's usage docs have been moved to the option page help tab
