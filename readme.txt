@@ -111,6 +111,9 @@ For example let's print a link to your YouTube channel:
 
 == Changelog ==
 
+= 2.0.6 =
+* Added ability to display menu separator above top-level menu item with `has_separator` argument
+
 = 2.0.5 =
 * Translation fix
 

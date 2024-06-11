@@ -62,20 +62,22 @@ class YMFO_Page {
 	 * @since 1.0.3  Has `parent_page` and `callback` arguments.
 	 * @since 1.0.10 Has `show_docs` argument.
 	 * @since 2.0.2  `show_docs` argument removed.
+	 * @since 2.0.6  Has `has_separator` argument.
      * 
      * @param string $page_title     The text to be displayed in the title tags of the page when the menu is selected.
      * @param string $page_slug_tale The tale part of slug name to refer to this menu by.
      * @param array  $page_args {
 	 * 		Additional arguments
 	 * 
-	 * 		@type bool                  $is_top_level Set false to make menu item as submenu to Settings menu. Default true.
-	 * 		@type null|string|YMFO_Page $parent_page  YMFO_Page class instance with parent page ot parent page slug. Default null.
-	 * 		@type string                $menu_title   The text to be used for the menu. Default $page_title.
-	 * 		@type string                $icon         The URL to the icon to be used for this menu. Default ''.
-	 * 		@type int                   $position     Set false to make menu item as submenu to Settings menu. Default null.
-	 * 		@type callable		        $callback     The function to be called to output the content for this page.
-	 * 		@type string                $capability   The capability required for this menu to be
-	 * 										          displayed to the user. Default 'manage_options'.
+	 * 		@type bool                  $has_separator If true, new separator will be displayed above the menu item. Default false.
+	 * 		@type null|string|YMFO_Page $parent_page   YMFO_Page class instance with parent page ot parent page slug. Default null.
+	 * 		@type bool                  $is_top_level  Set false to make menu item as submenu to Settings menu. Default true.
+	 * 		@type int                   $position      Set false to make menu item as submenu to Settings menu. Default null.
+	 * 		@type string                $icon          The URL to the icon to be used for this menu. Default ''.
+	 * 		@type string                $menu_title    The text to be used for the menu. Default $page_title.
+	 * 		@type callable		        $callback      The function to be called to output the content for this page.
+	 * 		@type string                $capability    The capability required for this menu to be
+	 * 										           displayed to the user. Default 'manage_options'.
 	 * }
      */
     function __construct ( string $page_title, string $page_slug_tale, array $page_args = [] ) {
@@ -84,17 +86,19 @@ class YMFO_Page {
         $this->page_slug      = YMFO::format_page_slug( $page_slug_tale );
         $this->page_title     = $page_title;
         $this->page_args      = [
-			'is_top_level' => true,
-			'parent_page'  => null,
+			'has_separator' => false,
 
-			'menu_title'   => $this->page_title,
-			'icon'         => '',
-			'position'     => null,
+			'parent_page'   => null,
+			'is_top_level'  => true,
 
-			'callback'     => function () {
+			'position'      => null,
+			'icon'          => '',
+			'menu_title'    => $this->page_title,
+
+			'callback'      => function () {
                 include YMFO_ROOT_DIR . 'page.php';
             },
-			'capability'   => 'manage_options',
+			'capability'    => 'manage_options',
 
 			...$page_args,
 		];
@@ -111,9 +115,18 @@ class YMFO_Page {
         ];
 
 		/** Add top page, settings page or child page */
-		if ( $this->page_args[ 'parent_page' ] === null ) {
+		if ( is_null( $this->page_args[ 'parent_page' ] ) ) {
 			if ( $this->page_args[ 'is_top_level' ] ) {
 				add_action( 'admin_menu', function () use ( $add_page_args ) {
+					if ( $this->page_args[ 'has_separator' ] ) {
+						add_menu_page( '', '',
+							$add_page_args[ 2 ],
+							' wp-menu-separator ymfo-menu-separator',
+							'', '',
+							$add_page_args[ 6 ]
+						);
+					}
+
 					add_menu_page( ...$add_page_args );
 				});
 			} else {
