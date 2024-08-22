@@ -45,7 +45,7 @@ require_once YMFO_ROOT_DIR . 'includes/YMFO_Page.class.php';
  * @return bool Always returns true.
  */
 function ymfo_add_option ( string $page, string $option, mixed $value = '', string|bool $autoload = 'yes' ) : bool {
-    return add_option( YMFO::format_field_slug( $page, $option ), $value, '', $autoload );
+	return add_option( YMFO::format_field_slug( $page, $option ), $value, '', $autoload );
 }
 
 /**
@@ -61,7 +61,7 @@ function ymfo_add_option ( string $page, string $option, mixed $value = '', stri
  * @return bool True if the value was updated, false otherwise.
  */
 function ymfo_update_option ( string $page, string $option, mixed $value = '', string|bool $autoload = null ) : bool {
-    return update_option( YMFO::format_field_slug( $page, $option ), $value, $autoload );
+	return update_option( YMFO::format_field_slug( $page, $option ), $value, $autoload );
 }
 
 /**
@@ -74,7 +74,7 @@ function ymfo_update_option ( string $page, string $option, mixed $value = '', s
  * @return mixed Option value or default value.
  */
 function ymfo_get_option ( string $page, string $option, mixed $default_value = false ) : mixed {
-    return get_option( YMFO::format_field_slug( $page, $option ), $default_value );
+	return get_option( YMFO::format_field_slug( $page, $option ), $default_value );
 }
 
 /**
