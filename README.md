@@ -8,7 +8,7 @@ First of all open your `functions.php` theme file. All the next steps will take 
 
 **1. Check is plugin activated**
 
-```
+```php
 /** Registers YMFO custom options */
 if ( class_exists( 'YMFO' ) ) {
 	// Next code here
@@ -19,7 +19,7 @@ if ( class_exists( 'YMFO' ) ) {
 
 For example it will be a contacts page.
 
-```
+```php
 $contacts_page = new YMFO_Page( 'Contacts', 'contacts' );
 ```
 
@@ -29,7 +29,7 @@ The first function argument is the page title, and the second is the page slug.
 
 For example it will be a section with social media links.
 
-```
+```php
 $contacts_page->add_section( 'Social media', 'social_media' );
 ```
 
@@ -37,7 +37,7 @@ The first function argument is the section title, and the second is the section 
 
 **4. Add options fields to section**
 
-```
+```php
 $contacts_page->add_field( 'YouTube', 'youtube_link', 'url', 'social_media' );
 $contacts_page->add_field( 'Facebook', 'facebook_link', 'url', 'social_media' );
 ```
@@ -50,7 +50,7 @@ You can locate the new options page in the WordPress admin area on the sidebar.
 
 Our result code is:
 
-```
+```php
 /** Registers YMFO custom options */
 if ( class_exists( 'YMFO' ) ) {
 	// Create page
@@ -71,9 +71,9 @@ To get your options values use `ymfo_get_option( $page_slug, $field_slug )` func
 
 For example let's print a link to your YouTube channel:
 
-`
+```php
 <a href="<?php echo esc_attr( ymfo_get_option( 'contacts', 'youtube_link' ) ); ?>">YouTube</a>
-`
+```
 
 ## Allowed field types
 
