@@ -12,7 +12,7 @@ class YMFO {
 	}
 
 	/**
-	 * Enqueues YM Fast Options scripts
+	 * Enqueues YM Fast Options scripts.
 	 * 
 	 * @since 1.0.8
 	 */
@@ -24,7 +24,7 @@ class YMFO {
 	}
 
 	/**
-	 * Adds shortcodes
+	 * Adds shortcodes.
 	 * 
 	 * @since 1.0.7
 	 */
