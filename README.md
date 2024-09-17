@@ -101,6 +101,14 @@ For example let's print a link to your YouTube channel:
 
 # Changelog
 
+## 2.1.0
+* Added multisite mode. Set `in_network` argument in YMFO_Page as true to set options as for multisite.
+* Added documentation link on Plugins page
+* `ymfo_update_option`, `ymfo_get_option` and `ymfo_is_option_exists` can be used to work with multisite options.
+* 'Settings saved' messages for non general options pages.
+* Better `select`, `checkbox` and `radio` fields work.
+* Now all YMFO_Page instances stored in YMFO `$pages` property.
+
 ## 2.0.6
 * Added ability to display menu separator above top-level menu item with `has_separator` argument
 

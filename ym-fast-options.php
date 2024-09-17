@@ -3,8 +3,8 @@
 /*
  * Plugin Name:       YM Fast Options
  * Description:       Create simple options for your WordPress website with a few lines of code.
- * Version:           2.0.6
- * Tested up to:      6.6.1
+ * Version:           2.1.0
+ * Tested up to:      6.6.2
  * Requires at least: 6.4
  * Requires PHP:      8.1
  * Author:            Yan Metelitsa
@@ -31,6 +31,27 @@ define( 'YMFO_ROOT_URI',    plugin_dir_url( __FILE__ ) );
 /** Include components */
 require_once YMFO_ROOT_DIR . 'includes/YMFO.class.php';
 require_once YMFO_ROOT_DIR . 'includes/YMFO_Page.class.php';
+
+/** Adds docs link */
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $links ) {
+	array_unshift( $links, sprintf( '<a href="%s" target="_blank">%s</a>',
+		'https://yanmet.com/blog/ym-fast-options-documentation',
+		__( 'Documentation', 'ym-fast-options' ),
+	));
+
+	return $links;
+});
+
+/** Connects styles and scripts */
+add_action( 'admin_enqueue_scripts', function () {
+	wp_enqueue_style( 'ymfo-styles', YMFO_ROOT_URI . 'assets/css/ymfo-style.css', [], YMFO_PLUGIN_DATA[ 'Version' ] );
+	wp_enqueue_script( 'ymfo-scripts', YMFO_ROOT_URI . 'assets/js/ymfo-script.js',  [], YMFO_PLUGIN_DATA[ 'Version' ] );
+});
+
+/** Adds shortcodes */
+add_shortcode( 'ymfo', function ( $atts ) {
+	return ymfo_get_option( $atts[ 'page' ], $atts[ 'option' ] );
+});
 
 /**
  * Adds new option.
@@ -61,7 +82,18 @@ function ymfo_add_option ( string $page, string $option, mixed $value = '', stri
  * @return bool True if the value was updated, false otherwise.
  */
 function ymfo_update_option ( string $page, string $option, mixed $value = '', string|bool $autoload = null ) : bool {
-	return update_option( YMFO::format_field_slug( $page, $option ), $value, $autoload );
+	$page_data   = YMFO::$pages[ $page ];
+	$option_name = YMFO::format_field_slug( $page, $option );
+
+	if ( !isset( $page_data ) ) {
+		return false;
+	}
+
+	if ( $page_data->page_args[ 'in_network' ] ) {
+		return update_site_option( $option_name, $value );
+	}
+
+	return update_option( $option_name, $value, $autoload );
 }
 
 /**
@@ -74,7 +106,18 @@ function ymfo_update_option ( string $page, string $option, mixed $value = '', s
  * @return mixed Option value or default value.
  */
 function ymfo_get_option ( string $page, string $option, mixed $default_value = false ) : mixed {
-	return get_option( YMFO::format_field_slug( $page, $option ), $default_value );
+	$page_data   = YMFO::$pages[ $page ];
+	$option_name = YMFO::format_field_slug( $page, $option );
+
+	if ( !isset( $page_data ) ) {
+		return $default_value;
+	}
+
+	if ( $page_data->page_args[ 'in_network' ] ) {
+		return get_site_option( $option_name, $default_value );
+	}
+
+	return get_option( $option_name, $default_value );
 }
 
 /**
@@ -88,12 +131,19 @@ function ymfo_get_option ( string $page, string $option, mixed $default_value = 
  * @return bool True if option exists.
  */
 function ymfo_is_option_exists ( string $page, string $option ) : bool {
+	$page_data   = YMFO::$pages[ $page ];
+
+	if ( !isset( $page_data ) ) {
+		return false;
+	}
+
 	global $wpdb;
 
-	$full_option_name = esc_sql( YMFO::format_field_slug( $page, $option ) );
-	
-	return boolval( $wpdb->query( "SELECT * FROM `{$wpdb->options}` WHERE `option_name` = '{$full_option_name}' LIMIT 1" ) );
-}
+	$in_network = $page_data->page_args[ 'in_network' ];
 
-/** Init YM Fast Options */
-YMFO::init();
+	$option_name = esc_sql( YMFO::format_field_slug( $page, $option ) );
+	$table       = $in_network ? $wpdb->sitemeta : $wpdb->options;
+	$column      = $in_network ? 'meta_key' : 'option_name';
+	
+	return boolval( $wpdb->query( "SELECT * FROM `{$table}` WHERE `{$column}` = '{$option_name}' LIMIT 1" ) );
+}

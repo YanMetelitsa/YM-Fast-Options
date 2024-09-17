@@ -1,10 +1,10 @@
 === YM Fast Options ===
 Contributors: yanmetelitsa
 Tags: options, settings
-Tested up to: 6.6.1
+Tested up to: 6.6.2
 Requires at least: 6.4
 Requires PHP: 8.1
-Stable tag: 2.0.6
+Stable tag: 2.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -110,6 +110,14 @@ For example let's print a link to your YouTube channel:
 1. **Install and Activate** YM Fast Options from the Plugins page
 
 == Changelog ==
+
+= 2.1.0 =
+* Added multisite mode. Set `in_network` argument in YMFO_Page as true to set options as for multisite.
+* Added documentation link on Plugins page
+* `ymfo_update_option`, `ymfo_get_option` and `ymfo_is_option_exists` can be used to work with multisite options.
+* 'Settings saved' messages for non general options pages.
+* Better `select`, `checkbox` and `radio` fields work.
+* Now all YMFO_Page instances stored in YMFO `$pages` property.
 
 = 2.0.6 =
 * Added ability to display menu separator above top-level menu item with `has_separator` argument

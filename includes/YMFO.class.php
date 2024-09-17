@@ -5,34 +5,12 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 /** Main YM Fast Options class */
 class YMFO {
-	/** Inits YM Fast Options */
-	public static function init () : void {
-		self::enqueue_scripts();
-		self::add_shortcodes();
-	}
-
 	/**
-	 * Enqueues YM Fast Options scripts.
+	 * YMFO pages archive data.
 	 * 
-	 * @since 1.0.8
+	 * @var YMFO_Page[]
 	 */
-	private static function enqueue_scripts () : void {
-		add_action( 'admin_enqueue_scripts', function () {
-			wp_enqueue_style( 'ymfo-styles', YMFO_ROOT_URI . 'assets/css/ymfo-style.css', [], YMFO_PLUGIN_DATA[ 'Version' ] );
-			wp_enqueue_script( 'ymfo-scripts', YMFO_ROOT_URI . 'assets/js/ymfo-script.js',  [], YMFO_PLUGIN_DATA[ 'Version' ] );
-		});
-	}
-
-	/**
-	 * Adds shortcodes.
-	 * 
-	 * @since 1.0.7
-	 */
-	private static function add_shortcodes () : void {
-		add_shortcode( 'ymfo', function ( $atts ) {
-			return ymfo_get_option( $atts[ 'page' ], $atts[ 'option' ] );
-		});
-	}
+	public static array $pages = [];
 
 	/**
 	 * Formats page slug tale.
