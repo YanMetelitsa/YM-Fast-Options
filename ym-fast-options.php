@@ -2,7 +2,7 @@
 
 /*
  * Plugin Name:       YM Fast Options
- * Description:       Create simple options for your WordPress website with a few lines of code.
+ * Description:       Create custom options for your WordPress site with just a few lines of code.
  * Version:           2.1.0
  * Tested up to:      6.6.2
  * Requires at least: 6.4

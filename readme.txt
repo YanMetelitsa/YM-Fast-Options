@@ -8,13 +8,17 @@ Stable tag: 2.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Create simple options, settings, global data fields and more for your WordPress website with a few lines of code.
+Create custom options, settings, global data fields, and more for your WordPress site with just a few lines of code.
 
 == Description ==
 
 = How to use =
 
-First of all open your `functions.php` theme file. All the next steps will take place in it.
+First, access your theme’s `functions.php` file. It can be found at the following path:
+
+`
+../wp-content/themes/your-theme/functions.php
+`
 
 **1. Check is plugin activated**
 
@@ -27,7 +31,7 @@ if ( class_exists( 'YMFO' ) ) {
 
 **2. Create options page**
 
-For example it will be a contacts page.
+In this example, we will create a Contacts page:
 
 `
 $contacts_page = new YMFO_Page( 'Contacts', 'contacts' );
@@ -37,7 +41,7 @@ The first function argument is the page title, and the second is the page slug.
 
 **3. Create options section**
 
-For example it will be a section with social media links.
+Now, let’s create a section for social media links within the Contacts page:
 
 `
 $contacts_page->add_section( 'Social media', 'social_media' );
@@ -47,6 +51,8 @@ The first function argument is the section title, and the second is the section 
 
 **4. Add options fields to section**
 
+Next, we will add fields for various social media links to the Social media section:
+
 `
 $contacts_page->add_field( 'YouTube', 'youtube_link', 'url', 'social_media' );
 $contacts_page->add_field( 'Facebook', 'facebook_link', 'url', 'social_media' );
@@ -54,9 +60,9 @@ $contacts_page->add_field( 'Facebook', 'facebook_link', 'url', 'social_media' );
 
 The first function argument is the field title, the second is the field slug, the third is the field type (you can find allowed types below) and the fourth is the field section slug.
 
-**It's done!**
+**That’s it!**
 
-You can locate the new options page in the WordPress admin area on the sidebar.
+You can now find your new options page in the WordPress admin sidebar.
 
 Our result code is:
 
@@ -79,7 +85,7 @@ if ( class_exists( 'YMFO' ) ) {
 
 To get your options values use `ymfo_get_option( $page_slug, $field_slug )` function or `[ymfo page="$page_slug" option="$field_slug"]` shortcode.
 
-For example let's print a link to your YouTube channel:
+For example, let’s print a link to YouTube channel:
 
 `
 <a href="<?php echo esc_attr( ymfo_get_option( 'contacts', 'youtube_link' ) ); ?>">YouTube</a>
@@ -102,6 +108,10 @@ For example let's print a link to your YouTube channel:
 - week
 - time
 - color
+
+= Documentation =
+
+You can find more detailed documentation on the [official website](https://yanmet.com/blog/ym-fast-options-wordpress-plugin-documentation).
 
 == Installation ==
 
