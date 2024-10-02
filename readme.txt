@@ -12,7 +12,7 @@ Create custom options, settings, global data fields, and more for your WordPress
 
 == Description ==
 
-Creating and managing options and settings is an essential feature for any modern website. While WordPress provides a built-in API for custom options, it can be cumbersome, leading to unnecessary code bloat and file clutter. With YM Fast Options, this process becomes significantly simpler!
+Creating and managing options and settings is an essential feature for any modern website. While WordPress provides a built-in Settings API, it can be cumbersome, leading to unnecessary code bloat and file clutter. With YM Fast Options, this process becomes significantly simpler!
 
 Easily create and manage site settings, store contacts, and handle dynamic data with streamlined efficiency.
 
@@ -22,8 +22,8 @@ You can find more detailed documentation on the [official website](https://yanme
 
 = Features =
 
-* Create customization pages, including top-level and sub-pages
-* Add and manage options for your customization pages
+* Create settings pages, including top-level and sub-pages
+* Add and manage options for your settings pages
 * Enjoy full access to all WordPress Settings API features within a lightweight interface
 * Seamlessly integrate settings into your multisite as needed
 
