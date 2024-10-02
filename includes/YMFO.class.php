@@ -1,9 +1,10 @@
 <?php
 
-/** Exit if accessed directly */
-if ( !defined( 'ABSPATH' ) ) exit;
+// Exits if accessed directly.
 
-/** Main YM Fast Options class */
+/**
+ * Main YM Fast Options class.
+ */
 class YMFO {
 	/**
 	 * YMFO pages archive data.

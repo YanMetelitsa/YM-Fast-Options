@@ -1,5 +1,5 @@
 <?php 
-	// Exit if accessed directly
+	// Exits if accessed directly.
 	if ( !defined( 'ABSPATH' ) ) exit;
 ?>
 
@@ -21,7 +21,7 @@
 <!-- Content -->
 <div class="ymfo-page-content">
 	<div class="wrap">
-		<form action="<?php echo $this->page_args[ 'in_network' ] ? "edit.php?action={$this->page_slug}" : 'options.php'; ?>" method="POST" class="ymfo-page-content__options-form">
+		<form action="<?php echo esc_attr( $this->page_args[ 'in_network' ] ? "edit.php?action={$this->page_slug}" : 'options.php' ); ?>" method="POST" class="ymfo-page-content__options-form">
 			<?php
 				if ( $this->page_args[ 'in_network' ] ) {
 					wp_nonce_field( 'ymfo_network_nonce' );

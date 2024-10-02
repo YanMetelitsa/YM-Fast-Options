@@ -12,106 +12,20 @@ Create custom options, settings, global data fields, and more for your WordPress
 
 == Description ==
 
-= How to use =
+Creating and managing options and settings is an essential feature for any modern website. While WordPress provides a built-in API for custom options, it can be cumbersome, leading to unnecessary code bloat and file clutter. With YM Fast Options, this process becomes significantly simpler!
 
-First, access your theme’s `functions.php` file. It can be found at the following path:
-
-`
-../wp-content/themes/your-theme/functions.php
-`
-
-**1. Check is plugin activated**
-
-`
-/** Registers YMFO custom options */
-if ( class_exists( 'YMFO' ) ) {
-	// Next code here
-}
-`
-
-**2. Create options page**
-
-In this example, we will create a Contacts page:
-
-`
-$contacts_page = new YMFO_Page( 'Contacts', 'contacts' );
-`
-
-The first function argument is the page title, and the second is the page slug.
-
-**3. Create options section**
-
-Now, let’s create a section for social media links within the Contacts page:
-
-`
-$contacts_page->add_section( 'Social media', 'social_media' );
-`
-
-The first function argument is the section title, and the second is the section slug.
-
-**4. Add options fields to section**
-
-Next, we will add fields for various social media links to the Social media section:
-
-`
-$contacts_page->add_field( 'YouTube', 'youtube_link', 'url', 'social_media' );
-$contacts_page->add_field( 'Facebook', 'facebook_link', 'url', 'social_media' );
-`
-
-The first function argument is the field title, the second is the field slug, the third is the field type (you can find allowed types below) and the fourth is the field section slug.
-
-**That’s it!**
-
-You can now find your new options page in the WordPress admin sidebar.
-
-Our result code is:
-
-`
-/** Registers YMFO custom options */
-if ( class_exists( 'YMFO' ) ) {
-	// Create page
-	$contacts_page = new YMFO_Page( 'Contacts', 'contacts' );
-
-	// Create section
-	$contacts_page->add_section( 'Social media', 'social_media' );
-
-	// Create fields
-	$contacts_page->add_field( 'YouTube', 'youtube_link', 'url', 'social_media' );
-	$contacts_page->add_field( 'Facebook', 'facebook_link', 'url', 'social_media' );
-}
-`
-
-= How to get new options values =
-
-To get your options values use `ymfo_get_option( $page_slug, $field_slug )` function or `[ymfo page="$page_slug" option="$field_slug"]` shortcode.
-
-For example, let’s print a link to YouTube channel:
-
-`
-<a href="<?php echo esc_attr( ymfo_get_option( 'contacts', 'youtube_link' ) ); ?>">YouTube</a>
-`
-
-= Allowed field types =
-
-- text
-- textarea
-- number
-- select
-- checkbox
-- radio
-- tel
-- email
-- url
-- date
-- datetime-local
-- month
-- week
-- time
-- color
+Easily create and manage site settings, store contacts, and handle dynamic data with streamlined efficiency.
 
 = Documentation =
 
 You can find more detailed documentation on the [official website](https://yanmet.com/blog/ym-fast-options-wordpress-plugin-documentation).
+
+= Features =
+
+* Create customization pages, including top-level and sub-pages
+* Add and manage options for your customization pages
+* Enjoy full access to all WordPress Settings API features within a lightweight interface
+* Seamlessly integrate settings into your multisite as needed
 
 == Installation ==
 

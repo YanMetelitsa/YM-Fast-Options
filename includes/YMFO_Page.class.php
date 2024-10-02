@@ -1,9 +1,11 @@
 <?php
 
-/** Exit if accessed directly */
+// Exits if accessed directly.
 if ( !defined( 'ABSPATH' ) ) exit;
 
-/** YM Fast Options page class */
+/**
+ * YM Fast Options page class.
+ */
 class YMFO_Page {
 	/**
 	 * Main part of page slug.
@@ -83,7 +85,7 @@ class YMFO_Page {
 	 * }
 	 */
 	function __construct ( string $page_title, string $page_slug_tale, array $page_args = [] ) {
-		/** Save page data to instance */
+		// Sуеы page data to instance.
 		$this->page_slug_tale = $page_slug_tale;
 		$this->page_slug      = YMFO::format_page_slug( $page_slug_tale );
 		$this->page_title     = $page_title;
@@ -107,17 +109,17 @@ class YMFO_Page {
 			...$page_args,
 		];
 
-		/** Check parent page */
+		// Check parent page.
 		if ( $this->page_args[ 'parent_page' ] instanceof YMFO_Page ) {
-			// Set in_network arg the same as parent's
+			// Sets `in_network` argument the same as parent's.
 			$this->page_args[ 'in_network' ] = $this->page_args[ 'parent_page' ]->page_args[ 'in_network' ];
 
-			// Reset parent_page as string (slug)
+			// Resets parent_page as string (slug).
 			$this->page_args[ 'parent_page' ] = $this->page_args[ 'parent_page' ]->page_slug;
 		}
 
-		/** Is network */
-		if ( !is_multisite() ) {
+		// Is network.
+		if ( ! is_multisite() ) {
 			$this->page_args[ 'in_network' ] = false;
 		}
 
@@ -138,30 +140,32 @@ class YMFO_Page {
 						}
 					}
 
-					wp_redirect( $_POST[ '_wp_http_referer' ] );
+					if ( isset( $_POST[ '_wp_http_referer' ] ) ) {
+						wp_redirect( wp_unslash( $_POST[ '_wp_http_referer' ] ) );
+					}
 
 					exit;
 				});
 			});
 		}
 
-		/** Set page arguments */
+		// Sets page arguments.
 		$add_page_args = [
-			$this->page_title,					// Page title
-			$this->page_args[ 'menu_title' ],	// Menu title
-			$this->page_args[ 'capability' ],	// Capability
-			$this->page_slug,					// Slug
-			$this->page_args[ 'callback' ],		// Callback
-			$this->page_args[ 'icon' ],			// Icon
-			$this->page_args[ 'position' ],		// Position
+			$this->page_title,					// Page title.
+			$this->page_args[ 'menu_title' ],	// Menu title.
+			$this->page_args[ 'capability' ],	// Capability.
+			$this->page_slug,					// Slug.
+			$this->page_args[ 'callback' ],		// Callback.
+			$this->page_args[ 'icon' ],			// Icon.
+			$this->page_args[ 'position' ],		// Position.
 		];
 
-		/** Add top page or child page */
+		// Adds as top=level page or child page.
 		if ( is_null( $this->page_args[ 'parent_page' ] ) ) {
-			/** Add as top level or as options page */
+			// Adds as top level or as options page.
 			if ( $this->page_args[ 'is_top_level' ] ) {
 				add_action( $admin_menu_action_tag, function () use ( $add_page_args ) {
-					/** Add separator */
+					// Adds separator.
 					if ( $this->page_args[ 'has_separator' ] ) {
 						add_menu_page(
 							'', '', $add_page_args[ 2 ],
@@ -173,12 +177,12 @@ class YMFO_Page {
 					add_menu_page( ...$add_page_args );
 				});
 			} else {
-				/** Remove icon argument value */
+				// Removes icon argument value.
 				unset( $add_page_args[ 5 ] );
 
-				/** Is network */
+				// Is network.
 				if ( $this->page_args[ 'in_network' ] ) {
-					/** Add parent slug argument value */
+					// Adds parent slug argument value.
 					array_unshift( $add_page_args, 'settings.php' );
 
 					add_action( $admin_menu_action_tag, function () use ( $add_page_args ) {
@@ -191,10 +195,10 @@ class YMFO_Page {
 				}
 			}
 		} else {
-			/** Remove icon argument value */
+			// Removes icon argument value.
 			unset( $add_page_args[ 5 ] );
 
-			/** Add parent slug argument value */
+			// Adds parent slug argument value.
 			array_unshift( $add_page_args, $this->page_args[ 'parent_page' ] );
 
 			add_action( $admin_menu_action_tag, function () use ( $add_page_args ) {
@@ -202,10 +206,10 @@ class YMFO_Page {
 			});
 		}
 
-		/** Add to YMFO pages archive data */
+		// Adds to YMFO pages archive data.
 		YMFO::$pages[ $this->page_slug_tale ] = $this;
 
-		/** Prints help tab */
+		// Prints `help` tab.
 		add_action( 'admin_head', function () {
 			$current_screen = get_current_screen();
 
@@ -213,15 +217,15 @@ class YMFO_Page {
 				ob_start();
 				
 				?>
-					<h3><?php _e( 'How to get option value', 'ym-fast-options' ) ?></h3>
-					<p><?php _e( 'To get option value you can use function in your theme, or shortcode in posts content.', 'ym-fast-options' ); ?></p>
-					<p><?php _e( 'In both cases, you\'ll need a <code>label</code> value – you will be able to find it under each field.', 'ym-fast-options' ); ?></p>
+					<h3><?php esc_html_e( 'How to get option value', 'ym-fast-options' ) ?></h3>
+					<p><?php esc_html_e( 'To get option value you can use function in your theme, or shortcode in posts content.', 'ym-fast-options' ); ?></p>
+					<p><?php echo wp_kses_post( __( 'In both cases, you\'ll need a <code>label</code> value – you will be able to find it under each field.', 'ym-fast-options' ) ); ?></p>
 
-					<h3><?php _e( 'Function', 'ym-fast-options' ) ?></h3>
-					<p><code class="ymfo-copyable">ymfo_get_option( '<?= esc_attr( $this->page_slug_tale ); ?>', 'label' )</code></p>
+					<h3><?php esc_html_e( 'Function', 'ym-fast-options' ) ?></h3>
+					<p><code class="ymfo-copyable">ymfo_get_option( '<?php echo esc_attr( $this->page_slug_tale ); ?>', 'label' )</code></p>
 
-					<h3><?php _e( 'Shortcode', 'ym-fast-options' ) ?></h3>
-					<p><code class="ymfo-copyable">[ymfo page="<?= esc_attr( $this->page_slug_tale ); ?>" option="label"]</code></p>
+					<h3><?php esc_html_e( 'Shortcode', 'ym-fast-options' ) ?></h3>
+					<p><code class="ymfo-copyable">[ymfo page="<?php echo esc_attr( $this->page_slug_tale ); ?>" option="label"]</code></p>
 				<?php
 
 				$how_to_use_content = ob_get_clean();
@@ -248,13 +252,13 @@ class YMFO_Page {
 	 */
 	public function add_section ( string $section_title, string $section_slug, array $section_args = [] ) : void {
 		$add_settings_section_args = [
-			$section_slug,								// Section slug
-			$section_title,								// Section title
-			function ( $args ) {					// Callback
+			$section_slug,								// Section slug.
+			$section_title,								// Section title.
+			function ( $args ) {					// Callback.
 				include YMFO_ROOT_DIR . 'section.php';
 			},
-			$this->page_slug,							// Page slug
-			$section_args,								// Additional arguments
+			$this->page_slug,							// Page slug.
+			$section_args,								// Additional arguments.
 		];
 		add_action( 'admin_init', function () use ( $add_settings_section_args ) {
 			add_settings_section( ...$add_settings_section_args );
@@ -311,15 +315,15 @@ class YMFO_Page {
 	 * }
 	 */
 	public function add_field ( string $field_title, string $field_slug_tale, string $field_type, string $field_section, array $field_args = [] ) : void {
-		/** Check is field type allowed */
+		// Checks is field type allowed.
 		if ( !in_array( $field_type, $this->available_field_types ) ) {
 			return;
 		}
 		
-		/** Get full field slug */
+		// Gets full field slug.
 		$field_slug = YMFO::format_field_slug( $this->page_slug_tale, $field_slug_tale );
 		
-		/** Register setting */
+		// Registers setting.
 		$page_slug_tale = $this->page_slug_tale;
 		$register_setting_args = [
 			$this->page_slug,
@@ -328,32 +332,32 @@ class YMFO_Page {
 		add_action( 'init', function () use ( $register_setting_args, $page_slug_tale, $field_slug_tale, $field_type, $field_args ) {
 			register_setting( ...$register_setting_args );
 
-			/** Set default value */
+			// Sets default value.
 			$current_option_value   = ymfo_get_option( $page_slug_tale, $field_slug_tale );
 			$is_current_value_empty = empty( $current_option_value ) && $current_option_value !== '0';
 			$is_option_exists       = ymfo_is_option_exists( $page_slug_tale, $field_slug_tale );
 
-			/** If checkbox and exists - not update */
+			// If checkbox and exists - not update.
 			if ( $field_type == 'checkbox' && $is_option_exists ) {
 				$is_current_value_empty = false; 
 			}
 
-			/** Update */
+			// Updates option value.
 			if ( isset( $field_args[ 'default' ] ) && $is_current_value_empty ) {
 				ymfo_update_option( $page_slug_tale, $field_slug_tale, $field_args[ 'default' ] );
 			}
 		});
 
-		/** Add field */
+		// Adds option field.
 		$add_settings_field_args = [
-			$field_slug,								// Field slug
-			$field_title,								// Field title
-			function ( $args ) {					// Callback
+			$field_slug,								// Field slug.
+			$field_title,								// Field title.
+			function ( $args ) {					// Callback.
 				include YMFO_ROOT_DIR . 'field.php';
 			},
-			$this->page_slug,							// Page slug
-			$field_section,								// Section slug
-			[											// Arguments
+			$this->page_slug,							// Page slug.
+			$field_section,								// Section slug.
+			[											// Arguments.
 				...$field_args,
 
 				'field_type'        => $field_type,

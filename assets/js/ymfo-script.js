@@ -2,6 +2,7 @@
 
 window.addEventListener( 'load', e => {
 	const copyables = document.querySelectorAll( '.ymfo-copyable' );
+	
 	copyables.forEach( copyable => {
 		copyable.addEventListener( 'click', e => {
 			navigator.clipboard.writeText( copyable.innerText );

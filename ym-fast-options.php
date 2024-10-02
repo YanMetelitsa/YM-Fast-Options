@@ -14,41 +14,41 @@
  * Text Domain:       ym-fast-options
  */
 
-/** Exit if accessed directly */
+// Exits if accessed directly.
 if ( !defined( 'ABSPATH' ) ) exit;
 
-/** Get plugin data */
+// Gets plugin data.
 if ( !function_exists( 'get_plugin_data' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
 $YMFO_plugin_data = get_plugin_data( __FILE__ );
 
-/** Define constants */
+// Defines plugin constants.
 define( 'YMFO_PLUGIN_DATA', $YMFO_plugin_data );
 define( 'YMFO_ROOT_DIR',    plugin_dir_path( __FILE__ ) );
 define( 'YMFO_ROOT_URI',    plugin_dir_url( __FILE__ ) );
 
-/** Include components */
+// Includes plugin components.
 require_once YMFO_ROOT_DIR . 'includes/YMFO.class.php';
 require_once YMFO_ROOT_DIR . 'includes/YMFO_Page.class.php';
 
-/** Adds docs link */
+// Adds docs link to plugin's card on Plugins page.
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $links ) {
 	array_unshift( $links, sprintf( '<a href="%s" target="_blank">%s</a>',
-		'https://yanmet.com/blog/ym-fast-options-documentation',
+		esc_url( 'https://yanmet.com/blog/ym-fast-options-documentation' ),
 		__( 'Documentation', 'ym-fast-options' ),
 	));
 
 	return $links;
 });
 
-/** Connects styles and scripts */
+// Connects styles and scripts.
 add_action( 'admin_enqueue_scripts', function () {
 	wp_enqueue_style( 'ymfo-styles', YMFO_ROOT_URI . 'assets/css/ymfo-style.css', [], YMFO_PLUGIN_DATA[ 'Version' ] );
-	wp_enqueue_script( 'ymfo-scripts', YMFO_ROOT_URI . 'assets/js/ymfo-script.js',  [], YMFO_PLUGIN_DATA[ 'Version' ] );
+	wp_enqueue_script( 'ymfo-scripts', YMFO_ROOT_URI . 'assets/js/ymfo-script.js',  [], YMFO_PLUGIN_DATA[ 'Version' ], true );
 });
 
-/** Adds shortcodes */
+// Adds 'ymfo' shortcode.
 add_shortcode( 'ymfo', function ( $atts ) {
 	return ymfo_get_option( $atts[ 'page' ], $atts[ 'option' ] );
 });
@@ -121,19 +121,19 @@ function ymfo_get_option ( string $page, string $option, mixed $default_value = 
 }
 
 /**
- * Returns is option exists in database.
+ * Returns true if option exists in database.
  * 
  * @since 2.0.1
  * 
- * @param string $page          Option page slug.
- * @param string $option        Option slug.
+ * @param string $page   Option page slug.
+ * @param string $option Option slug.
  * 
  * @return bool True if option exists.
  */
 function ymfo_is_option_exists ( string $page, string $option ) : bool {
-	$page_data   = YMFO::$pages[ $page ];
+	$page_data = YMFO::$pages[ $page ];
 
-	if ( !isset( $page_data ) ) {
+	if ( ! isset( $page_data ) ) {
 		return false;
 	}
 
@@ -141,9 +141,12 @@ function ymfo_is_option_exists ( string $page, string $option ) : bool {
 
 	$in_network = $page_data->page_args[ 'in_network' ];
 
-	$option_name = esc_sql( YMFO::format_field_slug( $page, $option ) );
-	$table       = $in_network ? $wpdb->sitemeta : $wpdb->options;
-	$column      = $in_network ? 'meta_key' : 'option_name';
+	$table  = esc_sql( $in_network ? $wpdb->sitemeta : $wpdb->options );
+	$column = esc_sql( $in_network ? 'meta_key' : 'option_name' );
 	
-	return boolval( $wpdb->query( "SELECT * FROM `{$table}` WHERE `{$column}` = '{$option_name}' LIMIT 1" ) );
+	return boolval( $wpdb->query(
+		$wpdb->prepare( "SELECT * FROM `$table` WHERE `$column` = %s LIMIT 1",
+			YMFO::format_field_slug( $page, $option ),
+		)
+	));
 }

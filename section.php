@@ -1,9 +1,9 @@
 <?php
 
-/** Exit if accessed directly */
+// Exits if accessed directly.
 if ( !defined( 'ABSPATH' ) ) exit;
 
-/** Print section description */
+// Prints section description.
 if ( isset( $args[ 'description' ] ) ) {
-	echo "<p>{$args[ 'description' ]}</p>";
+	printf( '<p>%s</p>', wp_kses_post( $args[ 'description' ] ) );
 }
