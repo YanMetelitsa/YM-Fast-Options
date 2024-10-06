@@ -1,10 +1,10 @@
 === YM Fast Options ===
 Contributors: yanmetelitsa
 Tags: options, settings
+Stable tag: 2.1.0
 Tested up to: 6.6.2
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 2.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
