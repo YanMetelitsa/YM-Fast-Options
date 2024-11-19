@@ -220,7 +220,17 @@ class YMFO_Page {
 				?>
 					<h3><?php esc_html_e( 'How to get option value', 'ym-fast-options' ) ?></h3>
 					<p><?php esc_html_e( 'To get option value you can use function in your theme, or shortcode in posts content.', 'ym-fast-options' ); ?></p>
-					<p><?php echo wp_kses_post( __( 'In both cases, you\'ll need a <code>label</code> value – you will be able to find it under each field.', 'ym-fast-options' ) ); ?></p>
+					<p>
+						<?php
+							/* translators: %s: label */
+							echo wp_kses_post(
+								sprintf(
+									__( 'In both cases, you\'ll need a %s value – you will be able to find it under each field.', 'ym-fast-options' ),
+									'<code>label</code>',
+								)
+							);
+						?>
+					</p>
 
 					<h3><?php esc_html_e( 'Function', 'ym-fast-options' ) ?></h3>
 					<p><code class="ymfo-copyable">ymfo_get_option( '<?php echo esc_attr( $this->page_slug_tale ); ?>', 'label' )</code></p>
