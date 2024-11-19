@@ -17,7 +17,7 @@ You can find more detailed documentation on the [official website](https://yanme
 * Enjoy full access to all WordPress Settings API features within a lightweight interface
 * Seamlessly integrate settings into your multisite as needed
 
-## Field types
+## Field Types
 
 * text
 * textarea
