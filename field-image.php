@@ -14,7 +14,7 @@
 	<?php printf( '<img src="%s" id="%s" alt="%s" style="%s" %s onclick="%s">',
 		esc_url( $image_uri ?? '' ),
 		esc_attr( "{$args[ 'label_for' ]}-img" ),
-		esc_attr__( 'Image', 'ym-fast-options' ),
+		esc_attr( $args[ 'field_title' ] ),
 		'cursor:pointer;',
 		esc_attr( $image_uri ? '' : 'hidden' ),
 		"document.querySelector( '#" . esc_attr( $args[ 'label_for' ] ) . "-change-button' ).click()",
