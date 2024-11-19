@@ -3,7 +3,6 @@
 	if ( !defined( 'ABSPATH' ) ) exit;
 ?>
 
-<!-- Header -->
 <div class="ymfo-page-header">
 	<div class="wrap">
 		<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
@@ -18,10 +17,16 @@
 	?>
 </div>
 
-<!-- Content -->
 <div class="ymfo-page-content">
 	<div class="wrap">
-		<form action="<?php echo esc_attr( $this->page_args[ 'in_network' ] ? "edit.php?action={$this->page_slug}" : 'options.php' ); ?>" method="POST" class="ymfo-page-content__options-form">
+		<?php
+			$ymfo_form_action = 'options.php';
+
+			if ( $this->page_args[ 'in_network' ] ) {
+				$ymfo_form_action = "edit.php?action={$this->page_slug}";
+			}
+		?>
+		<form action="<?php echo esc_attr( $ymfo_form_action ); ?>" method="POST" class="ymfo-page-content__options-form">
 			<?php
 				if ( $this->page_args[ 'in_network' ] ) {
 					wp_nonce_field( 'ymfo_network_nonce' );

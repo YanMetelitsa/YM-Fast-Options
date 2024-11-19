@@ -17,6 +17,25 @@ You can find more detailed documentation on the [official website](https://yanme
 * Enjoy full access to all WordPress Settings API features within a lightweight interface
 * Seamlessly integrate settings into your multisite as needed
 
+## Field types
+
+* text
+* textarea
+* number
+* select
+* checkbox
+* radio
+* tel
+* email
+* url
+* image
+* date
+* datetime-local
+* month
+* week
+* time
+* color
+
 # Installation
 
 1. **Visit** Plugins > Add New
@@ -24,6 +43,9 @@ You can find more detailed documentation on the [official website](https://yanme
 1. **Install and Activate** YM Fast Options from the Plugins page
 
 # Changelog
+
+## 2.2.0
+* Added `image` field type
 
 ## 2.1.0
 * Added multisite mode. Set `in_network` argument in YMFO_Page as true to set options as for multisite.

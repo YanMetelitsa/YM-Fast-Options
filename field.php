@@ -100,6 +100,13 @@ switch ( $args[ 'field_type' ] ) {
 		array_push( $field_classes, 'code' );
 
 		break;
+	// Image.
+	case 'image':
+		$field_print_mask = '';
+
+		include 'field-image.php';
+
+		break;
 }
 
 // Formats additional arguments.
@@ -131,7 +138,7 @@ if ( $args[ 'field_type' ] == 'checkbox' ) {
 }
 
 // Prints field.
-printf( '<p><code class="ymfo-copyable">%s</code>%s</p>',
+printf( '<p class="description"><code class="ymfo-copyable">%s</code>%s</p>',
 	esc_html( $args[ 'field_slug_tale' ] ),
 	wp_kses_post( $print_description ? " – {$args[ 'description' ]}" : '' ),
 );

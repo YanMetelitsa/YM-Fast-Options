@@ -50,6 +50,7 @@ class YMFO_Page {
 		'tel',
 		'email',
 		'url',
+		'image',            // Since 2.2.0
 		'date',
 		'datetime-local',
 		'month',
@@ -130,7 +131,7 @@ class YMFO_Page {
 
 			add_action( 'admin_init', function () {
 				add_action( "network_admin_edit_{$this->page_slug}", function () {
-					add_settings_error( $this->page_slug, 'settings_updated', __( 'Settings saved.' ), 'success' );
+					add_settings_error( $this->page_slug, 'settings_updated', __( 'Settings saved.', 'ym-fast-options' ), 'success' );
 
 					check_admin_referer( 'ymfo_network_nonce' );
 
@@ -285,6 +286,7 @@ class YMFO_Page {
 	 *                                - 'tel'
 	 *                                - 'email'
 	 *                                - 'url'
+	 *                                - 'image'
 	 *                                - 'date'
 	 *                                - 'datetime-local'
 	 *                                - 'month'
@@ -297,7 +299,7 @@ class YMFO_Page {
 	 * 
 	 * 		@type string $description Field description below input.
 	 * 		@type string $placeholder Input placeholder text. Default empty.
-	 * 		@type string $default     Default field value.
+	 * 		@type string $default     Default field value. Default empty.
 	 * 		@type bool   $required    Is field required. Default false.
 	 * 
 	 * 		# For number fields type

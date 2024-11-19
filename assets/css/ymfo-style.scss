@@ -27,6 +27,29 @@
 	min-height: unset !important;
 }
 
+.ymfo-image-field {
+	img {
+		width: 25em;
+		height: auto;
+		margin-bottom: 16px;
+		border-radius: 6px;
+
+		@media screen and ( max-width: 782px ) {
+			width: 100%;
+		}
+	}
+
+	.action-buttons {
+		margin-bottom: 6px;
+		
+		button {
+			&[ hidden ] {
+				display: none;
+			}
+		}
+	}
+}
+
 code.ymfo-copyable {
 	position: relative;
 	padding-left: 18px !important;
