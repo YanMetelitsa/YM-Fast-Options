@@ -3,10 +3,10 @@
 /*
  * Plugin Name:       YM Fast Options
  * Description:       Create custom options for your WordPress site with just a few lines of code.
- * Version:           2.2.0
+ * Version:           2.2.1
  * Requires PHP:      7.4
  * Requires at least: 6.0
- * Tested up to:      6.7
+ * Tested up to:      6.7.1
  * Author:            Yan Metelitsa
  * Author URI:        https://yanmet.com/
  * License:           GPLv3
@@ -21,7 +21,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 if ( !function_exists( 'get_plugin_data' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
-$YMFO_plugin_data = get_plugin_data( __FILE__ );
+$YMFO_plugin_data = get_plugin_data( __FILE__, true, false );
 
 // Defines plugin constants.
 define( 'YMFO_PLUGIN_DATA', $YMFO_plugin_data );

@@ -1,10 +1,10 @@
 === YM Fast Options ===
 Contributors: yanmetelitsa
 Tags: options, settings
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 Requires PHP: 7.4
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 6.7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -53,6 +53,9 @@ You can find more detailed documentation on the [official website](https://yanme
 1. **Install and Activate** YM Fast Options from the Plugins page
 
 == Changelog ==
+
+= 2.2.1 =
+* WordPress 6.7.0 `get_plugin_data() fix`
 
 = 2.2.0 =
 * Added `image` field type

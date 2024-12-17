@@ -44,6 +44,9 @@ You can find more detailed documentation on the [official website](https://yanme
 
 # Changelog
 
+## 2.2.1
+* WordPress 6.7.0 `get_plugin_data() fix`
+
 ## 2.2.0
 * Added `image` field type
 
