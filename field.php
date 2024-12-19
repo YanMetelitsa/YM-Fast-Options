@@ -1,7 +1,7 @@
 <?php
 
 // Exits if accessed directly.
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Sets field data.
 $field_classes           = [];
@@ -130,7 +130,7 @@ printf( $field_print_mask,
 // Prints description.
 $print_description = true;
 
-if ( !isset( $args[ 'description' ] ) ) {
+if ( ! isset( $args[ 'description' ] ) ) {
 	$print_description = false;
 }
 if ( $args[ 'field_type' ] == 'checkbox' ) {

@@ -15,16 +15,15 @@
  */
 
 // Exits if accessed directly.
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Gets plugin data.
-if ( !function_exists( 'get_plugin_data' ) ) {
+if ( ! function_exists( 'get_plugin_data' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
-$YMFO_plugin_data = get_plugin_data( __FILE__, true, false );
 
 // Defines plugin constants.
-define( 'YMFO_PLUGIN_DATA', $YMFO_plugin_data );
+define( 'YMFO_PLUGIN_DATA', get_plugin_data( __FILE__, true, false ) );
 define( 'YMFO_ROOT_DIR',    plugin_dir_path( __FILE__ ) );
 define( 'YMFO_ROOT_URI',    plugin_dir_url( __FILE__ ) );
 
@@ -33,7 +32,7 @@ require_once YMFO_ROOT_DIR . 'includes/YMFO.class.php';
 require_once YMFO_ROOT_DIR . 'includes/YMFO_Page.class.php';
 
 // Adds docs link to plugin's card on Plugins page.
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $links ) {
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( array $links ) : array {
 	array_unshift( $links, sprintf( '<a href="%s" target="_blank">%s</a>',
 		esc_url( 'https://yanmet.com/blog/ym-fast-options-documentation' ),
 		__( 'Documentation', 'ym-fast-options' ),
@@ -89,7 +88,7 @@ function ymfo_update_option ( string $page, string $option, mixed $value = '', s
 	$page_data   = YMFO::$pages[ $page ];
 	$option_name = YMFO::format_field_slug( $page, $option );
 
-	if ( !isset( $page_data ) ) {
+	if ( ! isset( $page_data ) ) {
 		return false;
 	}
 
@@ -113,7 +112,7 @@ function ymfo_get_option ( string $page, string $option, mixed $default_value = 
 	$page_data   = YMFO::$pages[ $page ];
 	$option_name = YMFO::format_field_slug( $page, $option );
 
-	if ( !isset( $page_data ) ) {
+	if ( ! isset( $page_data ) ) {
 		return $default_value;
 	}
 

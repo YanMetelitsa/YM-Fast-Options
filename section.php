@@ -1,7 +1,7 @@
 <?php
 
 // Exits if accessed directly.
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Prints section description.
 if ( isset( $args[ 'description' ] ) ) {

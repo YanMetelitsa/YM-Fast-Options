@@ -1,7 +1,7 @@
 <?php
 
 // Exits if accessed directly.
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * YM Fast Options page class.
@@ -222,9 +222,9 @@ class YMFO_Page {
 					<p><?php esc_html_e( 'To get option value you can use function in your theme, or shortcode in posts content.', 'ym-fast-options' ); ?></p>
 					<p>
 						<?php
-							/* translators: %s: label */
 							echo wp_kses_post(
 								sprintf(
+									/* translators: %s: `label` */
 									__( 'In both cases, you\'ll need a %s value – you will be able to find it under each field.', 'ym-fast-options' ),
 									'<code>label</code>',
 								)
@@ -328,7 +328,7 @@ class YMFO_Page {
 	 */
 	public function add_field ( string $field_title, string $field_slug_tale, string $field_type, string $field_section, array $field_args = [] ) : void {
 		// Checks is field type allowed.
-		if ( !in_array( $field_type, $this->available_field_types ) ) {
+		if ( ! in_array( $field_type, $this->available_field_types ) ) {
 			return;
 		}
 		
