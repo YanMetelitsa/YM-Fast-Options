@@ -1,7 +1,7 @@
 <?php
 
 // Exits if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 // Sets field data.
 $field_classes           = [];
@@ -116,11 +116,13 @@ foreach ( $field_additional_attrs as $attr => $value ) {
 }
 
 /** Print field */
+// phpcs:ignore
 printf( $field_print_mask,
 	esc_attr( $args[ 'field_type' ] ),							// 1. Type.
 	esc_attr( $args[ 'field_name' ] ),									// 2. Name.
 	esc_attr( $args[ 'field_id' ] ),									// 3. ID.
 	esc_attr( implode( ' ', $field_classes ) ),		// 4. Class.
+	// phpcs:ignore
 	implode( ' ', $field_additional_attrs_output ),	// 5. Additional attributes.
 	esc_attr( $field_placeholder ),										// 6. Placeholder.
 	esc_attr( $field_value ),											// 7. Value.

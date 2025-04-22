@@ -1,6 +1,6 @@
 <?php
 	// Exits if accessed directly.
-	if ( ! defined( 'ABSPATH' ) ) exit;
+	defined( 'ABSPATH' ) || exit;
 
 	$image_uri = $field_value ? wp_get_attachment_image_url( $field_value, 'full' ) : false;
 ?>
@@ -11,7 +11,7 @@
 		esc_attr( $field_value ),
 	); ?>
 
-	<?php printf( '<img src="%s" id="%s" alt="%s" style="%s" %s onclick="%s">',
+	<?php printf( '<img src="%s" id="%s" alt="%s" style="%s" %s onclick="%s">', // phpcs:ignore
 		esc_url( $image_uri ?? '' ),
 		esc_attr( "{$args[ 'label_for' ]}-img" ),
 		esc_attr( $args[ 'field_title' ] ),

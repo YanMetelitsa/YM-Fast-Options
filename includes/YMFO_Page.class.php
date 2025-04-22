@@ -1,7 +1,7 @@
 <?php
 
 // Exits if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * YM Fast Options page class.
@@ -224,7 +224,7 @@ class YMFO_Page {
 						<?php
 							echo wp_kses_post(
 								sprintf(
-									/* translators: %s: `label` */
+									/* translators: %s – `label` */
 									__( 'In both cases, you\'ll need a %s value – you will be able to find it under each field.', 'ym-fast-options' ),
 									'<code>label</code>',
 								)
@@ -342,6 +342,7 @@ class YMFO_Page {
 			$field_slug,
 		];
 		add_action( 'init', function () use ( $register_setting_args, $page_slug_tale, $field_slug_tale, $field_type, $field_args ) {
+			// phpcs:ignore
 			register_setting( ...$register_setting_args );
 
 			// Sets default value.

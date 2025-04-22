@@ -1,6 +1,7 @@
 <?php
 
 // Exits if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Main YM Fast Options class.
