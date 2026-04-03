@@ -3,10 +3,10 @@
 /*
  * Plugin Name:       YM Fast Options
  * Description:       Create custom options for your WordPress site with just a few lines of code.
- * Version:           2.2.2
+ * Version:           2.2.3
  * Requires PHP:      7.4
- * Requires at least: 6.0
- * Tested up to:      6.8
+ * Requires at least: 6.2
+ * Tested up to:      6.9
  * Author:            Yan Metelitsa
  * Author URI:        https://yanmet.com/
  * License:           GPLv3
@@ -60,15 +60,16 @@ add_shortcode( 'ymfo', function ( $atts ) {
  * Adds new option.
  * 
  * @since 1.0.11
+ * @since 2.2.3  `$autoload` is `null` by default.
  * 
- * @param string      $page       Option page slug.
- * @param string      $option     Option slug.
- * @param mixed       $value      Option value.
- * @param string|bool $autoload   Whether to load the option when WordPress starts up.
+ * @param string           $page       Option page slug.
+ * @param string           $option     Option slug.
+ * @param mixed            $value      Option value.
+ * @param string|bool|null $autoload   Whether to load the option when WordPress starts up.
  * 
  * @return bool Always returns true.
  */
-function ymfo_add_option ( string $page, string $option, mixed $value = '', string|bool $autoload = 'yes' ) : bool {
+function ymfo_add_option ( string $page, string $option, mixed $value = '', string|bool|null $autoload = null ) : bool {
 	return add_option( YMFO::format_field_slug( $page, $option ), $value, '', $autoload );
 }
 
@@ -84,7 +85,7 @@ function ymfo_add_option ( string $page, string $option, mixed $value = '', stri
  * 
  * @return bool True if the value was updated, false otherwise.
  */
-function ymfo_update_option ( string $page, string $option, mixed $value = '', string|bool $autoload = null ) : bool {
+function ymfo_update_option ( string $page, string $option, mixed $value = '', string|bool|null $autoload = null ) : bool {
 	$page_data   = YMFO::$pages[ $page ];
 	$option_name = YMFO::format_field_slug( $page, $option );
 
@@ -144,12 +145,12 @@ function ymfo_is_option_exists ( string $page, string $option ) : bool {
 
 	$in_network = $page_data->page_args[ 'in_network' ];
 
-	$table  = esc_sql( $in_network ? $wpdb->sitemeta : $wpdb->options );
-	$column = esc_sql( $in_network ? 'meta_key' : 'option_name' );
+	$table  = $in_network ? $wpdb->sitemeta : $wpdb->options;
+	$column = $in_network ? 'meta_key' : 'option_name';
 	
-	return boolval( $wpdb->query(
-		$wpdb->prepare( "SELECT * FROM `$table` WHERE `$column` = %s LIMIT 1", // phpcs:ignore
-			YMFO::format_field_slug( $page, $option ),
+	return boolval( $wpdb->query(		 // phpcs:ignore
+		$wpdb->prepare( "SELECT * FROM %i WHERE %i = %s LIMIT 1",
+			$table, $column, YMFO::format_field_slug( $page, $option ),
 		)
 	));
 }

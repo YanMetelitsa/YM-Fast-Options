@@ -85,8 +85,8 @@ class YMFO_Page {
 	 * 										           displayed to the user. Default 'manage_options'.
 	 * }
 	 */
-	function __construct ( string $page_title, string $page_slug_tale, array $page_args = [] ) {
-		// Sуеы page data to instance.
+	public function __construct ( string $page_title, string $page_slug_tale, array $page_args = [] ) {
+		// Sets page data to instance.
 		$this->page_slug_tale = $page_slug_tale;
 		$this->page_slug      = YMFO::format_page_slug( $page_slug_tale );
 		$this->page_title     = $page_title;
@@ -103,7 +103,7 @@ class YMFO_Page {
 			'menu_title'    => $this->page_title,
 
 			'callback'      => function () {
-				include YMFO_ROOT_DIR . 'page.php';
+				include YMFO_ROOT_DIR . 'parts/page.php';
 			},
 			'capability'    => 'manage_options',
 
@@ -142,7 +142,7 @@ class YMFO_Page {
 					}
 
 					if ( isset( $_POST[ '_wp_http_referer' ] ) ) {
-						wp_redirect( wp_unslash( $_POST[ '_wp_http_referer' ] ) );
+						wp_safe_redirect( wp_unslash( $_POST[ '_wp_http_referer' ] ) );
 					}
 
 					exit;
@@ -265,8 +265,8 @@ class YMFO_Page {
 		$add_settings_section_args = [
 			$section_slug,								// Section slug.
 			$section_title,								// Section title.
-			function ( $args ) {					// Callback.
-				include YMFO_ROOT_DIR . 'section.php';
+			function ( $args ) {						// Callback.
+				include YMFO_ROOT_DIR . 'parts/section.php';
 			},
 			$this->page_slug,							// Page slug.
 			$section_args,								// Additional arguments.
@@ -365,8 +365,8 @@ class YMFO_Page {
 		$add_settings_field_args = [
 			$field_slug,								// Field slug.
 			$field_title,								// Field title.
-			function ( $args ) {					// Callback.
-				include YMFO_ROOT_DIR . 'field.php';
+			function ( $args ) {						// Callback.
+				include YMFO_ROOT_DIR . 'parts/field.php';
 			},
 			$this->page_slug,							// Page slug.
 			$field_section,								// Section slug.

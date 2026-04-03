@@ -2,7 +2,7 @@
 	// Exits if accessed directly.
 	defined( 'ABSPATH' ) || exit;
 
-	$image_uri = $field_value ? wp_get_attachment_image_url( $field_value, 'full' ) : false;
+	$ymfo_image_uri = $field_value ? wp_get_attachment_image_url( $field_value, 'full' ) : false;
 ?>
 
 <div class="ymfo-image-field site-icon-section">
@@ -11,12 +11,12 @@
 		esc_attr( $field_value ),
 	); ?>
 
-	<?php printf( '<img src="%s" id="%s" alt="%s" style="%s" %s onclick="%s">', // phpcs:ignore
-		esc_url( $image_uri ?? '' ),
+	<?php printf( '<img src="%s" id="%s" alt="%s" style="%s" %s onclick="%s">',
+		esc_url( $ymfo_image_uri ?? '' ),
 		esc_attr( "{$args[ 'label_for' ]}-img" ),
 		esc_attr( $args[ 'field_title' ] ),
 		'cursor:pointer;',
-		esc_attr( $image_uri ? '' : 'hidden' ),
+		esc_attr( $ymfo_image_uri ? '' : 'hidden' ),
 		"document.querySelector( '#" . esc_attr( $args[ 'label_for' ] ) . "-change-button' ).click()",
 	); ?>
 	
@@ -24,21 +24,21 @@
 		<?php printf( '<button type="button" id="%s" class="%s" %s>%s</button>',
 			esc_attr( "{$args[ 'label_for' ]}-upload-button" ),
 			'button-add-site-icon',
-			esc_attr( $image_uri ? 'hidden' : '' ),
+			esc_attr( $ymfo_image_uri ? 'hidden' : '' ),
 			esc_html__( 'Choose an Image', 'ym-fast-options' ),
 		); ?>
 		
 		<?php printf( '<button type="button" id="%s" class="%s" %s>%s</button>',
 			esc_attr( "{$args[ 'label_for' ]}-change-button" ),
 			'button',
-			esc_attr( $image_uri ? '' : 'hidden' ),
+			esc_attr( $ymfo_image_uri ? '' : 'hidden' ),
 			esc_html__( 'Change Image', 'ym-fast-options' ),
 		); ?>
 		
 		<?php printf( '<button type="button" id="%s" class="%s" %s>%s</button>',
 			esc_attr( "{$args[ 'label_for' ]}-remove-button" ),
 			'button button-secondary reset remove-site-icon',
-			esc_attr( $image_uri ? '' : 'hidden' ),
+			esc_attr( $ymfo_image_uri ? '' : 'hidden' ),
 			esc_html__( 'Remove Image', 'ym-fast-options' ),
 		); ?>
 	</div>

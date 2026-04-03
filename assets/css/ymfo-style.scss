@@ -56,6 +56,8 @@ code.ymfo-copyable {
 
 	cursor: pointer;
 
+	line-height: 100%;
+
 	&:hover {
 		color: #000;
 
@@ -72,12 +74,12 @@ code.ymfo-copyable {
 		mask-size: contain;
 		mask-position: center;
 		mask-repeat: no-repeat;
-		width: 9px;
-		height: 9px;
+		width: 8px;
+		height: 8px;
 
 		position: absolute;
-		top: 5px;
-		left: 5px;
+		top: 7px;
+		left: 6px;
 	}
 
 	&.ymfo-copied::after {
