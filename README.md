@@ -38,6 +38,9 @@ You can find more detailed documentation on the [official website](https://yanme
 
 # Changelog
 
+## 2.2.3
+Minor fixes
+
 ## 2.2.1
 * Fix: WordPress 6.7.0 `get_plugin_data()`
 
