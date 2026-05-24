@@ -1,10 +1,10 @@
 === YM Fast Options ===
 Contributors: yanmetelitsa
 Tags: options, settings
-Stable tag: 2.2.3
+Stable tag: 2.3.0
 Requires PHP: 7.4
-Requires at least: 6.2
-Tested up to: 6.9
+Requires at least: 4.6
+Tested up to: 7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -47,6 +47,9 @@ You can find more detailed documentation on the [official website](https://yanme
 * color
 
 == Changelog ==
+
+= 2.3.0 =
+* New: `sanitize_callback` parameter in `YMFO_Page->add_field()` method.
 
 = 2.2.3 =
 * Minor fixes

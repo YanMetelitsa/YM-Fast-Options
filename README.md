@@ -38,6 +38,9 @@ You can find more detailed documentation on the [official website](https://yanme
 
 # Changelog
 
+## 2.3.0
+* New: `sanitize_callback` parameter in `YMFO_Page->add_field()` method.
+
 ## 2.2.3
 * Minor fixes
 

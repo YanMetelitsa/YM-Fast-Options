@@ -307,10 +307,11 @@ class YMFO_Page {
 	 * @param array  $field_args {
 	 * 		Additional arguments.
 	 * 
-	 * 		@type string $description Field description below input.
-	 * 		@type string $placeholder Input placeholder text. Default empty.
-	 * 		@type string $default     Default field value. Default empty.
-	 * 		@type bool   $required    Is field required. Default false.
+	 * 		@type string   $description       Field description below input.
+	 * 		@type string   $placeholder       Input placeholder text. Default empty.
+	 * 		@type string   $default           Default field value. Default empty.
+	 * 		@type bool     $required          Is field required. Default `false`.
+	 * 		@type callable $sanitize_callback Sanitize callback function. Default `null`.
 	 * 
 	 * 		# For number fields type
 	 * 
@@ -340,6 +341,9 @@ class YMFO_Page {
 		$register_setting_args = [
 			$this->page_slug,
 			$field_slug,
+			[
+				'sanitize_callback' => $field_args[ 'sanitize_callback' ] ?? null,
+			],
 		];
 		add_action( 'init', function () use ( $register_setting_args, $page_slug_tale, $field_slug_tale, $field_type, $field_args ) {
 			// phpcs:ignore
