@@ -171,7 +171,7 @@ class YMFO_Page {
 						add_menu_page(
 							'', '', $add_page_args[ 2 ],
 							' wp-menu-separator ymfo-menu-separator',
-							'', '', $add_page_args[ 6 ]
+							'', '', $add_page_args[ 6 ] // phpcs:ignore
 						);
 					}
 
