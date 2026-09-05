@@ -3,7 +3,7 @@
 /*
  * Plugin Name:       YM Fast Options
  * Description:       Create custom options for your WordPress site with just a few lines of code.
- * Version:           2.3.0
+ * Version:           2.3.1
  * Requires PHP:      7.4
  * Requires at least: 4.6
  * Tested up to:      7.1
@@ -46,7 +46,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook_suffix ) {
 	wp_enqueue_style( 'ymfo-styles', YMFO_ROOT_URI . 'assets/css/ymfo-style.css', [], YMFO_PLUGIN_DATA[ 'Version' ] );
 	wp_enqueue_script( 'ymfo-scripts', YMFO_ROOT_URI . 'assets/js/ymfo-script.js',  [], YMFO_PLUGIN_DATA[ 'Version' ], true );
 
-	if ( str_contains( $hook_suffix, 'ymfo' ) ) {
+	if ( strpos( $hook_suffix, 'ymfo' ) !== false ) {
 		wp_enqueue_media();
 	}
 });
@@ -149,7 +149,7 @@ function ymfo_is_option_exists ( string $page, string $option ) : bool {
 	$column = $in_network ? 'meta_key' : 'option_name';
 	
 	return boolval( $wpdb->query(		 // phpcs:ignore
-		$wpdb->prepare( "SELECT * FROM %i WHERE %i = %s LIMIT 1",
+		$wpdb->prepare( "SELECT * FROM %s WHERE %s = %s LIMIT 1",
 			$table, $column, YMFO::format_field_slug( $page, $option ),
 		)
 	));

@@ -1,7 +1,7 @@
 === YM Fast Options ===
 Contributors: yanmetelitsa
 Tags: options, settings
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 Requires PHP: 7.4
 Requires at least: 4.6
 Tested up to: 7.1
