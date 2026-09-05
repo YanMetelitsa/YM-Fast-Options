@@ -148,9 +148,9 @@ function ymfo_is_option_exists ( string $page, string $option ) : bool {
 	$table  = $in_network ? $wpdb->sitemeta : $wpdb->options;
 	$column = $in_network ? 'meta_key' : 'option_name';
 	
-	return boolval( $wpdb->query(		 // phpcs:ignore
-		$wpdb->prepare( "SELECT * FROM %s WHERE %s = %s LIMIT 1",
-			$table, $column, YMFO::format_field_slug( $page, $option ),
+	return boolval( $wpdb->query( // phpcs:ignore
+		$wpdb->prepare( "SELECT * FROM {$table} WHERE {$column} = %s LIMIT 1",
+			YMFO::format_field_slug( $page, $option ),
 		)
 	));
 }
