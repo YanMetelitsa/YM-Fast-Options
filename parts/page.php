@@ -10,11 +10,9 @@
 </div>
 
 <div class="wrap">
-	<?php
-		if ( get_current_screen()->parent_base !== 'options-general' ) {
-			settings_errors();
-		}
-	?>
+	<?php if ( get_current_screen()->parent_base !== 'options-general' ) : ?>
+		<?php settings_errors(); ?>
+	<?php endif; ?>
 </div>
 
 <div class="ymfo-page-content">
@@ -26,6 +24,7 @@
 				$ymfo_form_action = "edit.php?action={$this->page_slug}";
 			}
 		?>
+
 		<form action="<?php echo esc_attr( $ymfo_form_action ); ?>" method="POST" class="ymfo-page-content__options-form">
 			<?php
 				if ( $this->page_args[ 'in_network' ] ) {

@@ -46,6 +46,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook_suffix ) {
 	wp_enqueue_style( 'ymfo-styles', YMFO_ROOT_URI . 'assets/css/ymfo-style.css', [], YMFO_PLUGIN_DATA[ 'Version' ] );
 	wp_enqueue_script( 'ymfo-scripts', YMFO_ROOT_URI . 'assets/js/ymfo-script.js',  [], YMFO_PLUGIN_DATA[ 'Version' ], true );
 
+	// str_contains( $hook_suffix, 'ymfo' )
 	if ( strpos( $hook_suffix, 'ymfo' ) !== false ) {
 		wp_enqueue_media();
 	}

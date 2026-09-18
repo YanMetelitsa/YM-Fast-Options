@@ -136,6 +136,7 @@ class YMFO_Page {
 					check_admin_referer( 'ymfo_network_nonce' );
 
 					foreach ( $_POST as $label => $value ) {
+						// str_contains( $label, 'ymfo-' )
 						if ( strpos( $label, 'ymfo-' ) !== false ) {
 							update_site_option( $label, $value );
 						}
@@ -214,6 +215,7 @@ class YMFO_Page {
 		add_action( 'admin_head', function () {
 			$current_screen = get_current_screen();
 
+			// str_contains( $current_screen->base, $this->page_slug )
 			if ( strpos( $current_screen->base, $this->page_slug ) !== false ) {
 				ob_start();
 				
