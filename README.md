@@ -1,4 +1,13 @@
-Create custom options, settings, global data fields, and more for your WordPress site with just a few lines of code.
+# YM Fast Options
+
+![YM Fast Options Banner](https://ps.w.org/ym-fast-options/assets/banner-1544x500.png)
+
+[![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![Required PHP](https://img.shields.io/wordpress/plugin/required-php/ym-fast-options?label=Required%20PHP)
+![Required WordPress](https://img.shields.io/wordpress/plugin/wp-version/ym-fast-options?label=Required%20WordPress)
+
+![Downloads](https://img.shields.io/wordpress/plugin/dt/ym-fast-options.svg?label=WordPress.org%20Downloads)
+[![Rating](https://img.shields.io/wordpress/plugin/r/ym-fast-options.svg?label=WordPress.org%20Rating)](https://wordpress.org/support/plugin/ym-fast-options/reviews/)
 
 # Description
 
